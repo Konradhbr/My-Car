@@ -5,7 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+		<title><%= htmlWebpackPlugin.options.title %></title>
+		<script src="https://unpkg.com/vue-scrollto"></script>
+		<script>
+			if (typeof fg_widgets === "undefined") fg_widgets = new Array();
+			fg_widgets.push("fgid_210708a2263cbe8bb30d72a2a");
+		</script>
+		<script
+			async
+			src="https://www.feedgrabbr.com/widget/fgwidget.js"
+		></script>
   </head>
   <body>
     <noscript>

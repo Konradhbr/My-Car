@@ -33,9 +33,7 @@
           <br />
           <span
             >Forgot password
-            <a href="#" @click="$emit('openrecover')"
-              >Recover password</a
-            ></span
+            <a href="#" @click="$emit('openrecover')">Recover password</a></span
           >
           <button type="submit" class="button button--full">
             <span>login</span>
@@ -59,43 +57,40 @@ import Modal from '@/components/Modals/Modal.vue';
 import firebase from 'firebase';
 
 export default {
-	name: 'ModalDepositSuccess',
-	components: { Modal },
-	data() {
-		return {
-			form: {
-				email: '',
-				password: '',
-			},
-			error: null,
-		};
-	},
-	props: {
-		label: {
-			type: String,
-			required: true,
-		},
-	},
-	methods: {
-		close() {
-			this.$emit('close', true);
-		},
-		submit() {
-			firebase
-				.auth()
-				.signInWithEmailAndPassword(
-					this.form.email,
-					this.form.password,
-				)
-				// eslint-disable-next-line no-unused-vars
-				.then((data) => {
-					this.$router.replace({ name: 'Dashboard' });
-				})
-				.catch((err) => {
-					this.error = err.message;
-				});
-		},
-	},
+  name: 'ModalDepositSuccess',
+  components: { Modal },
+  data() {
+    return {
+      form: {
+        email: '',
+        password: '',
+      },
+      error: null,
+    };
+  },
+  props: {
+    label: {
+      type: String,
+      required: true,
+    },
+  },
+  methods: {
+    close() {
+      this.$emit('close', true);
+    },
+    submit() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.form.email, this.form.password)
+        // eslint-disable-next-line no-unused-vars
+        .then((data) => {
+          this.$router.replace({ name: 'Dashboard' });
+        })
+        .catch((err) => {
+          this.error = err.message;
+        });
+    },
+  },
 };
 </script>
 

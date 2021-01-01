@@ -59,57 +59,55 @@
 </template>
 
 <script>
-import firebase from 'firebase';
-import Modal from '@/components/Modals/Modal.vue';
-import Checkbox from '@/components/Buttons/Checkbox.vue';
+//import firebase from "firebase";
+import Modal from "@/components/Modals/Modal.vue";
+import Checkbox from "@/components/Buttons/Checkbox.vue";
 
 export default {
-	name: 'ModalRegister',
-	components: { Modal, Checkbox },
-	data() {
-		return {
-			form: {
-				email: '',
-				password: '',
-			},
-			error: null,
-		};
-	},
-	methods: {
-		close() {
-			this.$emit('close', true);
-		},
-		submit() {
-			firebase
-				.auth()
-				.createUserWithEmailAndPassword(
-					this.form.email,
-					this.form.password,
-				)
-				.then((data) => {
-					data.user
-						.updateProfile({
-							displayName: this.form.name,
-						})
-						.then(() => {});
-				})
-				.catch((err) => {
-					this.error = err.message;
-				});
-		},
-	},
+  name: "ModalRegister",
+  components: { Modal, Checkbox },
+  data() {
+    return {
+      form: {
+        email: "",
+        password: ""
+      },
+      error: null
+    };
+  },
+  methods: {
+    close() {
+      this.$emit("close", true);
+    }
+    // submit() {
+    //   firebase
+    //     .auth()
+    //     .createUserWithEmailAndPassword(this.form.email, this.form.password)
+    //     .then(data => {
+    //       data.user
+    //         .updateProfile({
+    //           displayName: this.form.name
+    //         })
+    //         .then(() => {});
+    //     })
+    //     .catch(err => {
+    //       this.error = err.message;
+    //     });
+    // }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/Scss/Components/_decor.scss';
+@import "@/assets/Scss/Components/_decor.scss";
+
 .modal__label {
   display: flex;
-  padding: 60px  40px ;
+  padding: 60px 40px;
 }
 
 .modal__text {
-  input[type='text'] {
+  input[type="text"] {
     font-size: 16px;
   }
   display: flex;
@@ -122,15 +120,14 @@ export default {
   margin-bottom: 40px;
 
   p {
-    color: black
-    ;
+    color: black;
   }
 }
 
 .modal__info {
   display: flex;
   flex-direction: column;
-  padding: 50px ;
+  padding: 50px;
 
   h2 {
     margin: 0 0 20px 0;

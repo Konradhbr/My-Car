@@ -1,22 +1,18 @@
 <template>
   <div class="news">
-      <div class="results">
-
-      </div>
+    <div class="feedgrabbr_widget" id="fgid_210708a2263cbe8bb30d72a2a"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'News',
-
+  name: "News"
 };
 </script>
 
 <style lang="scss" scoped>
 .news {
   width: 100%;
-  height: 100vh;
-  background-color: white;
+  height: auto;
 }
 </style>

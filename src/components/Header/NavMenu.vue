@@ -1,7 +1,7 @@
 <template>
-  <nav class="nav">
+  <nav class="nav" :class="{ 'nav--black': isBlack }">
     <div class="nav__logo">
-      <a href="#"><img src="@/assets/Images/logo.png" alt=""/></a>
+      <a href="#"><img src="@/assets/images/logo.png" alt=""/></a>
     </div>
     <div class="nav__menu">
       <Menu @openlogin="modalLogin = true" />
@@ -26,20 +26,26 @@
 </template>
 
 <script>
-import ModalLogin from '@/components/Modals/ModalLogin.vue';
-import ModalRegister from '@/components/Modals/ModalRegister.vue';
-import ModalRegisterSuccess from '@/components/Modals/ModalRegisterSuccess.vue';
-import ModalRecoverPassword from '@/components/Modals/ModalRecoverPassword.vue';
-import Menu from './Menu.vue';
+import ModalLogin from "@/components/Modals/ModalLogin.vue";
+import ModalRegister from "@/components/Modals/ModalRegister.vue";
+import ModalRegisterSuccess from "@/components/Modals/ModalRegisterSuccess.vue";
+import ModalRecoverPassword from "@/components/Modals/ModalRecoverPassword.vue";
+import Menu from "./Menu.vue";
 
 export default {
-  name: 'NavMenu',
+  name: "NavMenu",
   components: {
     Menu,
     ModalLogin,
     ModalRegister,
     ModalRegisterSuccess,
-    ModalRecoverPassword,
+    ModalRecoverPassword
+  },
+  props: {
+    blackBG: {
+      type: Boolean,
+      required: false
+    }
   },
   data() {
     return {
@@ -47,20 +53,20 @@ export default {
       modalRegister: false,
       modalRegisterSuccess: false,
       modalRecoverPassword: false,
+      isBlack: this.blackBG
     };
   },
-
   methods: {
     OpenHamburger() {
-      const value = document.querySelector('.nav__hamburger');
-      value.classList.toggle('nav__hamburger-active');
+      const value = document.querySelector(".nav__hamburger");
+      value.classList.toggle("nav__hamburger-active");
     },
     Open() {
-      const value = document.querySelector('.overlay__menu');
-      const element = document.querySelector('.nav__hamburger');
+      const value = document.querySelector(".overlay__menu");
+      const element = document.querySelector(".nav__hamburger");
 
-      value.classList.toggle('-open');
-      element.classList.toggle('nav__hamburger-active');
+      value.classList.toggle("-open");
+      element.classList.toggle("nav__hamburger-active");
     },
     CloseModals() {
       this.modalLogin = false;
@@ -68,12 +74,27 @@ export default {
       this.modalRegisterSuccess = false;
       this.modalRecoverPassword = false;
     },
-  },
+    ChangeBlack() {
+      if (this.bgColor == "black") {
+        this.isBlack = true;
+      }
+    }
+  }
 };
+// mounted() {
+//   if (this.bgColor == "black") {
+//     this.isBlack = true;
+//   }
+// },
+// created() {
+//   if (this.bgColor == "black") {
+//     this.isBlack = true;
+//   }
+// }
 </script>
 
 <style lang="scss" scoped>
-$background_color_1: transparent;
+//$background_color_1: transparent;
 
 .nav {
   background: rgba(250, 250, 250, 0.2);
@@ -83,6 +104,11 @@ $background_color_1: transparent;
   left: 0;
   top: 0;
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+
+  &--black {
+    background-color: black;
+  }
 }
 .nav__logo {
   display: flex;
@@ -165,7 +191,7 @@ $background_color_1: transparent;
 .nav__hamburger-active {
   background: rgba(250, 250, 250, 0.2);
   span {
-    background-color: $background_color_1;
+    //background-color: $background_color_1;
     &:before {
       top: 0;
       transform: rotate(135deg);

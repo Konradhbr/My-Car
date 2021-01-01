@@ -5,9 +5,7 @@
       <p>lorem ipsum</p>
     </div>
     <div class="scroll-icon">
-      <a href="#"
-        ><img src="@/assets/Images/scroll-icon.png" alt="scroll"
-      /></a>
+      <a href="#"><img src="@/assets/Images/scroll-icon.png" alt="scroll"/></a>
     </div>
     <!-- <div id="element" style="margin-top: 500px;">
                   <p>asdasd</p></div>    -->
@@ -16,7 +14,7 @@
 
 <script>
 export default {
-  name: 'Text',
+  name: "Text"
 };
 </script>
 
