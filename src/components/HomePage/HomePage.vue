@@ -2,7 +2,7 @@
   <div>
     <div class="home__nav"><NavMenu /></div>
     <div class="home">
-      <!-- <div><Text /></div> -->
+      <div class="bg"><VideoBackground /></div>
       <div class="home__text ">
         <div class="home__title">
           <h1>title</h1>
@@ -12,63 +12,53 @@
         </div>
       </div>
       <div class="home__icon">
-        <div class="icon" @click="scroll">
+        <div class="icon">
           <img src="@/assets/images/scroll-icon.png" alt="scroll" />
         </div>
-        <a href="#" id="return-top" v-scroll-to="'#top'">Top</a>
+        <a href="#" id="return-top"></a>
       </div>
     </div>
-    <div id="top" class="home__news"></div>
+    <div id="top" class="home__news"><News /></div>
   </div>
 </template>
 
 <script>
-// import VideoBackground from './VideoBackground.vue';
+import VideoBackground from "./VideoBackground.vue";
 import NavMenu from "../Header/NavMenu.vue";
-// import News from './News.vue';
+import News from "./News.vue";
 
 export default {
   name: "HomePage",
   components: {
-    // VideoBackground,
-    NavMenu
-
-    // News,
+    VideoBackground,
+    NavMenu,
+    News
   },
-  methods: {
-    scroll() {
-      document.getElementById("element").scrollIntoView().style.transition =
-        "1s";
-    },
-    scroll2() {
-      const Vue = require("vue");
-      const VueScrollTo = require("vue-scrollto");
-      Vue.use(VueScrollTo);
-    }
-  },
-  mounted() {
-    let recaptchaScript = document.createElement("script");
-    recaptchaScript.setAttribute("src", "https://unpkg.com/vue-scrollto");
-    document.head.appendChild(recaptchaScript);
-  }
+  methods: {}
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .home {
   width: 100%;
   height: auto;
-  background-color: green;
+  // background-color: green;
 }
 .home__text {
+  position: absolute;
+  top: 0;
+  padding-top: 50vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   width: 100%;
-  height: 70%;
+  //height: 70%;
 }
 .home__icon {
+  position: absolute;
+  top: 0;
+  padding-top: 50vh;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -77,13 +67,19 @@ export default {
   width: 60px;
 }
 
+.bg {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
 .home__news {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: red;
+  background-color: white;
   width: 100%;
-  height: 1000px;
+  height: 100%;
 }
 #element {
   transition: 2s;

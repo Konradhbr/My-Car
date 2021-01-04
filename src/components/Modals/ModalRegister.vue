@@ -59,7 +59,7 @@
 </template>
 
 <script>
-//import firebase from "firebase";
+import firebase from "firebase";
 import Modal from "@/components/Modals/Modal.vue";
 import Checkbox from "@/components/Buttons/Checkbox.vue";
 
@@ -78,22 +78,22 @@ export default {
   methods: {
     close() {
       this.$emit("close", true);
+    },
+    submit() {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.form.email, this.form.password)
+        .then(data => {
+          data.user
+            .updateProfile({
+              displayName: this.form.name
+            })
+            .then(() => {});
+        })
+        .catch(err => {
+          this.error = err.message;
+        });
     }
-    // submit() {
-    //   firebase
-    //     .auth()
-    //     .createUserWithEmailAndPassword(this.form.email, this.form.password)
-    //     .then(data => {
-    //       data.user
-    //         .updateProfile({
-    //           displayName: this.form.name
-    //         })
-    //         .then(() => {});
-    //     })
-    //     .catch(err => {
-    //       this.error = err.message;
-    //     });
-    // }
   }
 };
 </script>

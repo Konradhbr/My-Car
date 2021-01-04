@@ -1,27 +1,37 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import HomePage from '@/components/HomePage/HomePage.vue';
-import Calculators from '@/components/Calculators/Calculators.vue';
+import Vue from "vue";
+import VueRouter from "vue-router";
+
+const homePage = () =>
+  import("@/components/HomePage/HomePage.vue").then(m => m.default || m);
+const calculators = () =>
+  import("@/components/Calculators/Calculators.vue").then(m => m.default || m);
+const dashboard = () =>
+  import("@/components/UserPanel/Dashboard.vue").then(m => m.default || m);
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: HomePage,
+    path: "/",
+    name: "Home",
+    component: homePage
   },
   {
-    path: '/Calculators',
-    name: 'Calculators',
-    component: Calculators,
+    path: "/Calculators",
+    name: "Calculators",
+    component: calculators
   },
+  {
+    path: "/Dashboard",
+    name: "Dashboard",
+    component: dashboard
+  }
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 export default router;

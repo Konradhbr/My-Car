@@ -1,7 +1,9 @@
 <template>
   <nav class="nav" :class="{ 'nav--black': isBlack }">
     <div class="nav__logo">
-      <a href="#"><img src="@/assets/images/logo.png" alt=""/></a>
+      <router-link :to="{ name: 'Home' }">
+        <img src="@/assets/images/logo.png" alt="" />
+      </router-link>
     </div>
     <div class="nav__menu">
       <Menu @openlogin="modalLogin = true" />
@@ -12,7 +14,10 @@
     <ModalLogin
       v-if="modalLogin"
       @close="CloseModals"
-      @openregister="modalRegister = true"
+      @openregister="
+        modalRegister = true;
+        modalLogin = false;
+      "
       @openrecover="modalRecoverPassword = true"
     />
     <ModalRegister

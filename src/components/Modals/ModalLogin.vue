@@ -7,7 +7,7 @@
         <h2>login</h2>
         <div v-if="error" class="alert alert-danger">{{ error }}</div>
 
-        <form>
+        <form action="#" @submit.prevent="submit">
           <label for="email">Email</label><br />
           <input
             id="email"
@@ -39,11 +39,7 @@
             <span>login</span>
           </button>
           <p>or</p>
-          <button
-            type="submit"
-            class="button button--full"
-            @click="$emit('openregister')"
-          >
+          <button class="button button--full" @click="$emit('openregister')">
             <span>create account</span>
           </button>
         </form>
@@ -53,44 +49,44 @@
 </template>
 
 <script>
-import Modal from '@/components/Modals/Modal.vue';
-import firebase from 'firebase';
+import Modal from "@/components/Modals/Modal.vue";
+import firebase from "firebase";
 
 export default {
-  name: 'ModalDepositSuccess',
+  name: "ModalDepositSuccess",
   components: { Modal },
   data() {
     return {
       form: {
-        email: '',
-        password: '',
+        email: "",
+        password: ""
       },
-      error: null,
+      error: null
     };
   },
   props: {
-    label: {
-      type: String,
-      required: true,
-    },
+    // label: {
+    //   type: String,
+    //   required: true
+    // }
   },
   methods: {
     close() {
-      this.$emit('close', true);
+      this.$emit("close", true);
     },
     submit() {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         // eslint-disable-next-line no-unused-vars
-        .then((data) => {
-          this.$router.replace({ name: 'Dashboard' });
+        .then(data => {
+          this.$router.replace({ name: "Dashboard" });
         })
-        .catch((err) => {
+        .catch(err => {
           this.error = err.message;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -101,7 +97,7 @@ export default {
 }
 
 .modal__text {
-  input[type='text'] {
+  input[type="text"] {
     font-size: 16px;
   }
   display: flex;

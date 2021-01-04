@@ -17,17 +17,17 @@
 </template>
 
 <script>
-import NavMenu from '../Header/NavMenu.vue';
-import LPG from '@/components/Calculators/LPG.vue';
-import FuelConsumption from './FuelConsumption.vue';
+import NavMenu from "../Header/NavMenu.vue";
+import LPG from "@/components/Calculators/LPG.vue";
+import FuelConsumption from "./FuelConsumption.vue";
 
 export default {
-  name: 'Calculators',
+  name: "Calculators",
   components: {
     NavMenu,
     LPG,
-    FuelConsumption,
-  },
+    FuelConsumption
+  }
 };
 </script>
 <style lang="scss" scoped>

@@ -1,20 +1,21 @@
 <template>
   <div id="app">
-    <!-- <HomePage /> -->
-    <div class="container">
+    <router-link :to="{ name: 'Home' }"> </router-link>
+    <!-- <div class="container">
       <Calculators />
-    </div>
-    <!-- <router-view /> -->
+    </div> -->
+
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 //import HomePage from "@/components/HomePage/HomePage.vue";
-import Calculators from "./components/Calculators/Calculators.vue";
+//import Calculators from "./components/Calculators/Calculators.vue";
 export default {
   components: {
-    //HomePage,
-    Calculators
+    //HomePage
+    //Calculators
   }
 };
 </script>

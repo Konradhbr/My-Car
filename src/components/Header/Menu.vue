@@ -1,9 +1,10 @@
 <template>
   <nav :class="{ overlay__menu: isMobile }">
-    <!-- <div class="main__menu "> -->
     <ul class="menu">
       <li>
-        <a href="#">Strona startowa</a>
+        <router-link :to="{ name: 'Home' }">
+          <a href="#">Strona startowa</a>
+        </router-link>
       </li>
       <li>
         <a href="#">News</a>
@@ -18,35 +19,55 @@
         </router-link>
       </li>
       <li>
-        <a href="#">panel użytkownika</a>
+        <router-link :to="{ name: 'Dashboard' }">
+          <a href="#">panel użytkownika</a>
+        </router-link>
       </li>
-      <div
-        class="user"
-        :class="{ 'user-mobile': isMobile, 'user-desktop': isDesktop }"
-        @click="$emit('openlogin')"
-      >
-        <User />
-      </div>
+      <template v-if="user.loggedIn">
+        <li class="nav-item">
+          <p>{{ user.data.email }}</p>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" @click.prevent="signOut">Sign out</a>
+        </li>
+      </template>
+      <template v-else>
+        <div
+          class="user"
+          :class="{ 'user-mobile': isMobile, 'user-desktop': isDesktop }"
+          @click="$emit('openlogin')"
+        >
+          <User />
+        </div>
+      </template>
     </ul>
-    <!-- </div> -->
   </nav>
 </template>
 
 <script>
-import User from '../Icons/User.vue';
+import firebase from "firebase";
+import { mapGetters } from "vuex";
+
+import User from "../Icons/User.vue";
 
 export default {
-  name: 'Menu',
+  name: "Menu",
   components: { User },
+  computed: {
+    ...mapGetters({
+      // map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
+  },
   data() {
     return {
       isMobile: false,
-      isDesktop: false,
+      isDesktop: false
     };
   },
   mounted() {
-    this.$nextTick(function () {
-      window.addEventListener('resize', this.getWindowWidth);
+    this.$nextTick(function() {
+      window.addEventListener("resize", this.getWindowWidth);
 
       this.getWindowWidth();
     });
@@ -64,11 +85,21 @@ export default {
         this.isDesktop = true;
       }
     },
+    signOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace({
+            name: "Home"
+          });
+        });
+    }
   },
   beforeUnmount() {
-    window.removeEventListener('resize', this.getWindowWidth);
-    window.removeEventListener('resize', this.getWindowHeight);
-  },
+    window.removeEventListener("resize", this.getWindowWidth);
+    window.removeEventListener("resize", this.getWindowHeight);
+  }
 };
 </script>
 
