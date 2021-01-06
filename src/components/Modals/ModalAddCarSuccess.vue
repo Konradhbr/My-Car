@@ -5,7 +5,7 @@
 
       <div class="modal__text">
         <div class="success-icon"><IconSuccess /></div>
-        <h2>Konto utworzone pomyślnie</h2>
+        <h2>Auto dodane pomyślnie</h2>
         <p>
           Rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum.
           Integer aliquam purus. Quisque lorem tortor fringilla sed
@@ -22,7 +22,7 @@
 import Modal from "@/components/Modals/Modal.vue";
 
 export default {
-  name: "ModalRegisterSuccess",
+  name: "ModalAddCarSuccess",
   components: { Modal },
   props: {
     label: {

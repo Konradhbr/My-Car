@@ -33,7 +33,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+/* body {
   font-family: "Montserrat", sans-serif;
   margin: 0 !important;
   padding: 0;
@@ -43,5 +43,5 @@ body {
 .container {
   box-sizing: border-box;
   padding: 0 5%;
-}
+} */
 </style>

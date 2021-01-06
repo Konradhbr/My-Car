@@ -2,7 +2,12 @@
   <transition appear name="fade">
     <div class="modal">
       <div class="modal-inner">
-        <a href="#" class="modal-close" @click.prevent="close">
+        <a
+          href="#"
+          class="modal-close"
+          :class="{ 'modal-close-hide': (showClose = false) }"
+          @click.prevent="close"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -39,8 +44,15 @@ export default {
           size: "8px",
           keepShow: true
         }
-      }
+      },
+      showClose: this.showCloseSign
     };
+  },
+  props: {
+    showCloseSign: {
+      type: Boolean,
+      required: false
+    }
   },
   mounted() {
     document.documentElement.classList.add("modal-opened");
@@ -86,7 +98,9 @@ export default {
   justify-content: center;
   overflow-y: auto;
 }
-
+.closeSign-hide {
+  display: none;
+}
 .modal-close {
   position: absolute;
   top: 20px;
@@ -99,6 +113,10 @@ export default {
   z-index: 1001;
   border: 2px solid rgba(15, 32, 108, 0.3);
   border-radius: 100%;
+}
+
+.modal-close-hide {
+  z-index: -500;
 }
 
 .modal-inner {

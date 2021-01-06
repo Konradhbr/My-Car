@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     user: {
       loggedIn: false,
-      data: null
+      data: null,
+      choosenCar: false
     }
   },
   getters: {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
     SET_USER(state, data) {
       state.user.data = data;
+    },
+    SET_CHOOSEN_CAR(state, value) {
+      state.user.choosenCar = value;
     }
   },
   actions: {
@@ -34,6 +38,9 @@ export default new Vuex.Store({
       } else {
         commit("SET_USER", null);
       }
+    },
+    fetchChoosenCar({ commit }, value) {
+      commit("SET_CHOOSEN_CAR", value);
     }
   },
   modules: {}
