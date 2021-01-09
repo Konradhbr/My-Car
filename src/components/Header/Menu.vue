@@ -3,56 +3,82 @@
     <ul class="menu">
       <li>
         <router-link :to="{ name: 'Home' }">
-          <a href="#">Strona startowa</a>
+          <a href="#">Strona główna</a>
         </router-link>
       </li>
       <li>
-        <a href="#">News</a>
+        <a
+          class="link-off"
+          :class="{ disable: user.loggedIn, active: !user.loggedIn }"
+          @click="$emit('showLoginAlert')"
+          >panel użytkownika</a
+        >
+        <router-link
+          :to="{ name: 'Dashboard' }"
+          :class="{ disable: !user.loggedIn, active: user.loggedIn }"
+        >
+          <a>panel użytkownika</a>
+        </router-link>
       </li>
       <li>
-        <a href="#">subpage3</a>
+        <router-link :to="{ name: 'Home' }">
+          <a href="#">Newsy</a>
+        </router-link>
       </li>
+      <!-- <li>
+        <a href="#">subpage3</a>
+      </li> -->
 
       <li>
         <router-link :to="{ name: 'Calculators' }">
           <a href="#">kalkulatory</a>
         </router-link>
       </li>
-      <li>
-        <router-link :to="{ name: 'Dashboard' }">
-          <a href="#">panel użytkownika</a>
-        </router-link>
-      </li>
       <template v-if="user.loggedIn">
-        <li class="nav-item">
-          <p>{{ user.data.email }}</p>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" @click.prevent="signOut">Sign out</a>
-        </li>
+        <div
+          class="user"
+          :class="{ 'user-mobile': isMobile, 'user-desktop': isDesktop }"
+        >
+          <User />
+          <div class="user-info">
+            <!-- <li class="nav-item"> -->
+            <p class="nav-item">{{ user.data.email }}</p>
+            <!-- </li> -->
+            <!-- <li class="nav-item"> -->
+            <p class="nav-link nav-item uppercase" @click.prevent="signOut">
+              Wyloguj
+            </p>
+            <!-- </li> -->
+          </div>
+        </div>
       </template>
       <template v-else>
         <div
-          class="user"
+          class="user margin-top"
           :class="{ 'user-mobile': isMobile, 'user-desktop': isDesktop }"
           @click="$emit('openlogin')"
         >
           <User />
+          <p class="uppercase">zaloguj</p>
         </div>
       </template>
     </ul>
+    <!-- <ModalAlertLogin
+      v-if="modalAlertLogin"
+      @close="this.modalAlertLogin = false"
+    /> -->
   </nav>
 </template>
 
 <script>
 import firebase from "firebase";
 import { mapGetters } from "vuex";
-
 import User from "../Icons/User.vue";
+//import ModalAlertLogin from "../Modals/ModalAlertLogin.vue";
 
 export default {
   name: "Menu",
-  components: { User },
+  components: { User }, //ModalAlertLogin },
   computed: {
     ...mapGetters({
       // map `this.user` to `this.$store.getters.user`
@@ -62,7 +88,8 @@ export default {
   data() {
     return {
       isMobile: false,
-      isDesktop: false
+      isDesktop: false,
+      modalAlertLogin: false
     };
   },
   mounted() {
@@ -77,7 +104,7 @@ export default {
     // eslint-disable-next-line no-unused-vars
     getWindowWidth(event) {
       const windowWidth = document.documentElement.clientWidth;
-      if (windowWidth < 1024) {
+      if (windowWidth < 1280) {
         this.isMobile = true;
         this.isDesktop = false;
       } else {
@@ -95,6 +122,9 @@ export default {
           });
         });
     }
+    // showAlertLogin() {
+    //   this.modalAlertLogin = true;
+    // }
   },
   beforeUnmount() {
     window.removeEventListener("resize", this.getWindowWidth);
@@ -105,10 +135,11 @@ export default {
 
 <style lang="scss" scoped>
 .overlay__menu {
+  position: relative;
   background: rgba(0, 0, 0, 0.95);
   color: white;
   position: fixed;
-  z-index: 100;
+  z-index: 3;
   left: 0;
   top: 0;
   height: 100%;
@@ -118,6 +149,25 @@ export default {
   text-align: center;
   transform: translateY(-100%);
   transition: all 0.5s;
+
+  &::after {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 84px;
+    height: 2px;
+    width: 100%;
+    background-color: $color-red;
+  }
+  &::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 190px;
+    height: 2px;
+    width: 100%;
+    background-color: $color-red;
+  }
   .main__menu {
     transition: all 0.7s;
     transition-delay: 0.7s;
@@ -132,36 +182,39 @@ export default {
   }
   ul {
     list-style: none;
-    margin-top: 80px;
+    margin-top: 150px;
     padding: 0px;
     li {
-      padding: 15px 0px;
+      padding: 30px 0px;
       a {
+        position: relative;
         font-size: 24px;
-        font-weight: 300;
-        color: red;
+        color: white;
         text-decoration: none;
         transition: all 0.5s;
         &:hover {
-          color: red;
+          &::after {
+            position: absolute;
+            background: none repeat scroll 0 0 transparent;
+            bottom: 0;
+            content: "";
+            display: block;
+            height: 2px;
+            left: 50%;
+            background: #fff;
+            transition: width 0.3s ease 0s, left 0.3s ease 0s;
+            width: 0;
+          }
         }
       }
     }
-  }
-  p {
-    margin-top: 60px;
-    font-size: 13px;
-    text-transform: uppercase;
-    color: red;
-    font-weight: 200;
-    letter-spacing: 0.5px;
-    text-align: center;
   }
 }
 .-open {
   opacity: 1;
   transform: translateY(0%);
-  padding-top: 50px;
+  padding-top: 83px;
+
   .main-menu {
     transition: all 0.7s;
     transition-delay: 0.7s;
@@ -171,17 +224,59 @@ export default {
       transition-delay: 1.25s;
     }
   }
+  .nav {
+    border-bottom: 3px solid white;
+  }
 }
 .user {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 12px;
+  }
+  // p {
+  //   color: white;
+  // }
+
+  .nav-link {
+    text-transform: uppercase;
+  }
+
+  p,
+  a {
+    margin: 6px 20px 0 20px;
+    text-align: left;
+    color: white;
+  }
 }
 
 .user-mobile {
-  top: 80px;
+  top: 110px;
   left: 26px;
 }
 
-@media screen and (min-width: 1024px) {
+.link-off {
+  opacity: 0.5;
+}
+.active {
+  display: static;
+}
+.disable {
+  display: none;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 1280px) {
   @keyframes line {
     0% {
       background-position-x: 390px;
@@ -208,42 +303,42 @@ export default {
   }
   .menu {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    max-width: 720px;
-    margin: 0 auto;
+    margin: 0;
     height: 80px;
     list-style: none;
+    padding-left: 100px;
     li {
-      display: flex;
-      align-items: center;
-      width: 125px;
-      height: 50px;
-      transition: background-position-x 0.9s linear;
-      text-align: center;
+      margin: 0 20px;
       a {
-        font-size: 22px;
         color: white;
-        text-decoration: none;
-        transition: all 0.45s;
-      }
-      & {
-        &:hover {
-          // eslint-disable-next-line max-len
-          animation: line 1s;
-          a {
-            color: red;
-          }
-        }
-        &:not(:last-child) {
-          margin-right: 30px;
-        }
+        font-size: 15px;
+        letter-spacing: -1px;
       }
     }
   }
+  .margin-top {
+    margin-top: 10px;
+  }
   .user-desktop {
-    top: 26px;
-    right: 60px;
+    top: 9px;
+    right: 28px;
+  }
+  .user-info {
+    p {
+      font-size: 15px;
+    }
+  }
+}
+@media screen and (min-width: 1550px) {
+  .menu {
+    padding-left: 350px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .menu {
+    padding-left: 450px;
   }
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
-  <div class="calcPage">
+  <div class="calcPage container">
     <div class="home__nav">
       <NavMenu :blackBG="true" />
     </div>
     <div class="content">
       <div class="mainText">
-        <h1>main text</h1>
-        <h3>sub text</h3>
+        <h3>lista kalkulatorów</h3>
+        <!-- <h3>sub text</h3> -->
       </div>
       <div class="calculators">
         <div class="fuel"><FuelConsumption /></div>
@@ -34,6 +34,7 @@ export default {
 .calcPage {
   width: 100%;
   height: auto;
+  // background-color: red;
 }
 .slide-enter,
 .slide-leave-to {
@@ -48,13 +49,14 @@ export default {
   margin: 0;
   width: 100%;
   height: auto;
-  margin-top: 200px;
+  background-color: red;
 }
 .mainText {
   display: flex;
   flex-direction: column;
   text-align: center;
   width: 100%;
+  margin-top: 200px;
 }
 .calculators {
   display: flex;

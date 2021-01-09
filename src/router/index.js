@@ -7,6 +7,8 @@ const calculators = () =>
   import("@/components/Calculators/Calculators.vue").then(m => m.default || m);
 const dashboard = () =>
   import("@/components/UserPanel/Dashboard.vue").then(m => m.default || m);
+// const news = () =>
+//   import("@/components/HomePage/News.vue").then(m => m.default || m);
 
 Vue.use(VueRouter);
 
@@ -26,6 +28,11 @@ const routes = [
     name: "Dashboard",
     component: dashboard
   }
+  // {
+  //   path: "/Home",
+  //   name: "News",
+  //   component: news
+  // }
 ];
 
 const router = new VueRouter({

@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <template v-if="!user.choosenCar">
+    <template v-if="user.choosenCar">
       <ModalChooseCar @openModalAddCar="modalAddCar = !modalAddCar" />
       <ModalAddCar v-if="modalAddCar" />
     </template>

@@ -3,22 +3,40 @@
     <div class="home__nav"><NavMenu /></div>
     <div class="home">
       <div class="bg"><VideoBackground /></div>
-      <div class="home__text ">
+      <div class="home__text container">
         <div class="home__title">
-          <h1>title</h1>
+          <h2>
+            Zarządzaj swoim<br />
+            autem
+            <span class="home__title--underline">online</span>
+          </h2>
         </div>
         <div class="home__description">
-          <h3>description</h3>
+          <h4>
+            w łatwy i szybki sposób kontroluj<br />
+            statystyki i dane swojego auta
+          </h4>
         </div>
       </div>
       <div class="home__icon">
         <div class="icon">
-          <img src="@/assets/images/scroll-icon.png" alt="scroll" />
+          <a href="#news" id="goNews">
+            <img src="@/assets/images/scroll-icon.png" alt="scroll" />
+          </a>
         </div>
-        <a href="#" id="return-top"></a>
       </div>
     </div>
-    <div id="top" class="home__news"><News /></div>
+    <div class="home__news">
+      <div class="news-gradient"></div>
+      <div class="news__description container">
+        <h2 id="news" class="news--red">Newsy</h2>
+        <h4>
+          Sprawdź najnowsze informacje<br />
+          oraz ciekawostki ze świata motoryzacji
+        </h4>
+      </div>
+      <div id="news" class="home__news"><News /></div>
+    </div>
   </div>
 </template>
 
@@ -42,46 +60,87 @@ export default {
 .home {
   width: 100%;
   height: auto;
-  // background-color: green;
+  background-color: black;
 }
+
 .home__text {
   position: absolute;
-  top: 0;
-  padding-top: 50vh;
+  top: 200px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  text-align: center;
   width: 100%;
-  //height: 70%;
+}
+.home__title {
+  margin-bottom: 100px;
+}
+.home__title--underline {
+  text-decoration: underline;
+  text-decoration-color: $color-red;
 }
 .home__icon {
   position: absolute;
-  top: 0;
-  padding-top: 50vh;
+  bottom: 120px;
   display: flex;
   justify-content: center;
   width: 100%;
+  z-index: 1;
 }
 .icon {
   width: 60px;
 }
 
 .bg {
-  position: relative;
+  position: block;
   width: 100%;
   height: 100vh;
+  opacity: 0.7;
 }
 
 .home__news {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
   width: 100%;
   height: 100%;
+  z-index: 0;
+}
+.news-gradient {
+  background-image: linear-gradient(to bottom, transparent, $color-purple2);
+  top: -324px;
+  width: 100%;
+  height: 332px;
+  position: absolute;
+}
+.news--red {
+  color: $color-red;
+  text-align: left;
+  margin-bottom: 10px;
+}
+.news__description {
+  width: 100%;
+  height: auto;
+  padding: 200px 5% 100px 5%;
+  background-color: $color-purple2;
+  z-index: 2;
+  text-align: left;
+  h4 {
+    line-height: 35px;
+  }
 }
 #element {
   transition: 2s;
+}
+@media screen and (min-width: 1010px) {
+  .home__text {
+    margin-top: 120px;
+    text-align: left;
+  }
+  .home__title {
+    margin-bottom: 50px;
+  }
 }
 </style>

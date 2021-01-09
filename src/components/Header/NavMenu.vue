@@ -6,7 +6,10 @@
       </router-link>
     </div>
     <div class="nav__menu">
-      <Menu @openlogin="modalLogin = true" />
+      <Menu
+        @openlogin="modalLogin = true"
+        @showLoginAlert="modalAlertLogin = true"
+      />
     </div>
     <div class="nav__hamburger" @click="Open">
       <span></span>
@@ -27,6 +30,7 @@
     />
     <ModalRegisterSuccess v-if="modalRegisterSuccess" @close="CloseModals" />
     <ModalRecoverPassword v-if="modalRecoverPassword" @close="CloseModals" />
+    <ModalAlertLogin v-if="modalAlertLogin" @close="CloseModals" />
   </nav>
 </template>
 
@@ -35,6 +39,8 @@ import ModalLogin from "@/components/Modals/ModalLogin.vue";
 import ModalRegister from "@/components/Modals/ModalRegister.vue";
 import ModalRegisterSuccess from "@/components/Modals/ModalRegisterSuccess.vue";
 import ModalRecoverPassword from "@/components/Modals/ModalRecoverPassword.vue";
+import ModalAlertLogin from "../Modals/ModalAlertLogin.vue";
+
 import Menu from "./Menu.vue";
 
 export default {
@@ -44,7 +50,8 @@ export default {
     ModalLogin,
     ModalRegister,
     ModalRegisterSuccess,
-    ModalRecoverPassword
+    ModalRecoverPassword,
+    ModalAlertLogin
   },
   props: {
     blackBG: {
@@ -58,7 +65,8 @@ export default {
       modalRegister: false,
       modalRegisterSuccess: false,
       modalRecoverPassword: false,
-      isBlack: this.blackBG
+      isBlack: this.blackBG,
+      modalAlertLogin: false
     };
   },
   methods: {
@@ -78,6 +86,7 @@ export default {
       this.modalRegister = false;
       this.modalRegisterSuccess = false;
       this.modalRecoverPassword = false;
+      this.modalAlertLogin = false;
     },
     ChangeBlack() {
       if (this.bgColor == "black") {
@@ -86,21 +95,9 @@ export default {
     }
   }
 };
-// mounted() {
-//   if (this.bgColor == "black") {
-//     this.isBlack = true;
-//   }
-// },
-// created() {
-//   if (this.bgColor == "black") {
-//     this.isBlack = true;
-//   }
-// }
 </script>
 
 <style lang="scss" scoped>
-//$background_color_1: transparent;
-
 .nav {
   background: rgba(250, 250, 250, 0.2);
   height: 80px;
@@ -141,32 +138,32 @@ export default {
 }
 .nav__hamburger {
   background: transparent;
-  border: 1px solid red;
+  border: 1px solid white;
   width: 50px;
   height: 50px;
   margin: 15px 39px 0 auto;
   position: relative;
   cursor: pointer;
-  //transition: background 0.5s;
+  transition: background 0.2s;
   border-radius: 5px;
   span {
     cursor: pointer;
     border-radius: 1px;
     height: 2px;
     width: 35px;
-    background: red;
+    background: white;
     position: absolute;
     left: 15%;
     top: 50%;
     display: block;
     content: "";
-    transition: all 0.5s ease-in-out;
+    transition: all 0.2s ease-in-out;
     &:before {
       cursor: pointer;
       border-radius: 1px;
       height: 2px;
       width: 35px;
-      background: red;
+      background: white;
       position: absolute;
       left: 15%;
       top: 50%;
@@ -181,7 +178,7 @@ export default {
       border-radius: 1px;
       height: 2px;
       width: 35px;
-      background: red;
+      background: white;
       position: absolute;
       left: 15%;
       top: 50%;
@@ -196,7 +193,7 @@ export default {
 .nav__hamburger-active {
   background: rgba(250, 250, 250, 0.2);
   span {
-    //background-color: $background_color_1;
+    background-color: transparent;
     &:before {
       top: 0;
       transform: rotate(135deg);
@@ -214,7 +211,7 @@ export default {
 .nav__logo {
   z-index: 99999;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1280px) {
   .nav__hamburger {
     display: none;
   }

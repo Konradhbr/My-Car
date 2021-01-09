@@ -26,7 +26,7 @@
     height: 48px;
     display: inline-flex;
     align-items: center;
-    color: $white;
+    color: white;
     background-color:blue;
     padding: 0 30px;
     border-radius: 24px;
@@ -55,7 +55,7 @@
 
     span {
       background-color: blue;
-      color: $white;
+      color: white;
     }
 
     &::after {

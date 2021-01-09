@@ -9,9 +9,7 @@
 @font-face {
   font-family: 'Montserrat-SemiBold', sans-serif;
 
-  src: url('./fonts/Montserrat-SemiBold.woff') format('woff'),
-    /* Modern Browsers */ url('./fonts/Montserrat-SemiBold.woff2')
-      format('woff2'); /* Modern Browsers */
+  src: url('@/assets/fonts/Montserrat-SemiBold.ttf') format('ttf');
   font-weight: 800;
   font-style: normal;
 }

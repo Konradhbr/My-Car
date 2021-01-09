@@ -9,27 +9,27 @@ export default {
   props: {
     color: {
       type: String,
-      default: 'dark',
+      default: "dark"
     },
     label: {
       type: String,
-      required: true,
+      required: true
     },
     outline: {
       type: Boolean,
-      default: false,
+      default: false
     },
     fullWidth: {
       type: Boolean,
-      default: true,
-    },
-  },
+      default: true
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .button {
-  font-family: 'calibre-semibold', sans-serif;
+  font-family: "calibre-semibold", sans-serif;
   font-size: 17px;
   text-transform: uppercase;
   position: relative;
@@ -38,7 +38,7 @@ export default {
   border: none;
   cursor: pointer;
 
-  &[disabled='disabled'] {
+  &[disabled="disabled"] {
     span {
       background: rgba(15, 32, 108, 0.2);
     }
@@ -60,8 +60,8 @@ export default {
     height: 48px;
     display: inline-flex;
     align-items: center;
-    color: $white;
-    background-color: $bright-light-blue;
+    color: white;
+    background-color: blue;
     padding: 0 30px;
     border-radius: 24px;
     line-height: 1;
@@ -75,9 +75,9 @@ export default {
     z-index: 0;
     width: calc(100% - 20px);
     height: 28px;
-    content: '';
-    background-color: $bright-light-blue;
-    box-shadow: 0 10px 50px 0 $bright-light-blue;
+    content: "";
+    background-color: blue;
+    box-shadow: 0 10px 50px 0 blue;
     border-radius: 24px;
     opacity: 0;
     pointer-events: none;
@@ -93,7 +93,7 @@ export default {
     // }
 
     span {
-      background-color: $color-navy-blue-100;
+      background-color: darkblue;
     }
 
     &::after {
@@ -105,13 +105,13 @@ export default {
 .button--outlined {
   &:hover {
     span {
-      border-color: $color-navy-blue-100;
-      background-color: $color-navy-blue-100;
-      color: $white;
+      border-color: darkblue;
+      background-color: darkblue;
+      color: white;
     }
 
     g {
-      stroke: $white;
+      stroke: white;
     }
 
     &::after {
@@ -143,21 +143,21 @@ export default {
 
 .button--orange {
   span {
-    background-color: $color-orange-100;
-    color: $white;
+    background-color: orange;
+    color: white;
   }
 }
 
 .button--navy {
   span {
-    background-color: $color-navy-blue-100;
-    color: $white;
+    background-color: darkblue;
+    color: white;
   }
 }
 
 .button--white {
   span {
-    background-color: $white;
+    background-color: white;
     color: $color-navy-blue-100;
   }
 }
@@ -165,13 +165,13 @@ export default {
 .button--bordered {
   &:hover {
     span {
-      border-color: $color-navy-blue-100;
-      background-color: $color-navy-blue-100;
-      color: $white;
+      border-color: darkblue;
+      background-color: darkblue;
+      color: white;
     }
 
     path {
-      stroke: $white;
+      stroke: white;
     }
 
     &::after {
@@ -181,8 +181,8 @@ export default {
 
   span {
     border: solid 1.6px rgb(191, 195, 214);
-    background-color: $white;
-    color: $color-navy-blue-100;
+    background-color: white;
+    color: darkblue;
   }
 }
 

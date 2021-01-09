@@ -2,22 +2,21 @@
   <div>
     <div class="banner">
       <div class="banner__label">
-        <img src="" alt="" />
+        <img src="@/assets/images/piggy-bank.png" alt="piggy-bank" />
       </div>
       <span class="banner__title">
-        <h3>kalkulator opłacalności</h3>
+        <h4>kalkulator opłacalności instalacji lpg</h4>
       </span>
       <div class="banner__button">
-        <div class="dropbtn">
-          <button
-            @click="
-              isOpen = !isOpen;
-              reset();
-            "
-          >
-            btn
-          </button>
-        </div>
+        <button
+          class="button "
+          @click="
+            isOpen = !isOpen;
+            reset();
+          "
+        >
+          <span>btn</span>
+        </button>
       </div>
     </div>
     <div
@@ -85,13 +84,13 @@
 </template>
 
 <script>
-import VueSlider from 'vue-slider-component';
-import 'vue-slider-component/theme/antd.css';
+import VueSlider from "vue-slider-component";
+import "vue-slider-component/theme/antd.css";
 
 export default {
-  name: 'LPG',
+  name: "LPG",
   components: {
-    VueSlider,
+    VueSlider
   },
   data() {
     return {
@@ -101,7 +100,7 @@ export default {
       petrolConsumption: 0,
       lpgConsumption: 0,
       show: false,
-      isOpen: false,
+      isOpen: false
     };
   },
   methods: {
@@ -112,8 +111,8 @@ export default {
         (this.petrolValue = 0),
         (this.lpgValue = 0),
         (this.show = false);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -122,7 +121,7 @@ export default {
   position: relative;
   width: 100%;
   height: auto;
-  background-color: white;
+  background-color: $color-gray;
   background-size: cover;
   overflow: hidden;
   border: 1px solid rgba(15, 32, 108, 0.15);
@@ -138,13 +137,8 @@ export default {
 }
 
 .banner__title {
-  h3 {
-    color: red;
-    font-size: 42px;
-    line-height: 52px;
-    text-align: left;
-    margin-bottom: 17px;
-    padding-right: 50%;
+  h4 {
+    text-align: center;
   }
 }
 .banner__description {
@@ -152,10 +146,20 @@ export default {
     padding-right: 50%;
   }
 }
+.banner__label {
+  margin: 40px 0;
+  text-align: center;
+  img {
+    width: 80px;
+  }
+}
 
 .banner__button {
-  float: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
   overflow: hidden;
+
   .dropbtn {
     display: block;
     width: fit-content;
