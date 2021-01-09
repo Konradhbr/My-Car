@@ -25,28 +25,28 @@
 
 <script>
 export default {
-	inheritAttrs: false,
-	props: {
-		v: {
-			type: [Boolean, Object],
-			default: () => {
-				return false;
-			},
-		},
-		label: {
-			type: String,
-			required: true,
-		},
-		name: {
-			type: String,
-			required: true,
-		},
-		type: {
-			type: String,
-			default: 'text',
-		},
-	},
-	methods: {},
+  inheritAttrs: false,
+  props: {
+    v: {
+      type: [Boolean, Object],
+      default: () => {
+        return false;
+      }
+    },
+    label: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    type: {
+      type: String,
+      default: "text"
+    }
+  },
+  methods: {}
 };
 </script>
 
@@ -62,14 +62,14 @@ export default {
 
   &:hover {
     & > div {
-      background-image: url('../../assets/Icons/check.svg');
+      background-image: url("../../assets/Icons/check.svg");
       background-repeat: no-repeat;
       background-position: center center;
     }
   }
 }
 
-.checkbox input[type='checkbox'] {
+.checkbox input[type="checkbox"] {
   opacity: 0;
   position: absolute;
   cursor: pointer;
@@ -95,9 +95,9 @@ export default {
   margin-right: 20px;
 }
 
-.checkbox input[type='checkbox']:checked ~ div,
+.checkbox input[type="checkbox"]:checked ~ div,
 .checkbox--checked > div {
-  background-image: url('../../assets/Icons/check.svg');
+  background-image: url("../../assets/Icons/check.svg");
   background-repeat: no-repeat;
   background-position: center center;
   background-color: forestgreen;
@@ -105,7 +105,7 @@ export default {
   box-shadow: none;
 }
 
-.checkbox input[aria-invalid='true'] ~ div {
+.checkbox input[aria-invalid="true"] ~ div {
   border-color: red;
 }
 
@@ -141,7 +141,7 @@ export default {
 
 .label-checkbox:hover {
   .checkbox > div {
-    background-image: url('../../assets/Icons/check.svg');
+    background-image: url("../../assets/Icons/check.svg");
     background-repeat: no-repeat;
     background-position: center center;
   }

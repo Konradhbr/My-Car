@@ -6,9 +6,29 @@
     </div>
     <div class="main">
       <div class="main__bg">
-        <div class="main__nav">
+        <div class="main__nav--desktop">
           <router-link
             v-for="subpage in subpages"
+            :key="subpage.route"
+            :to="{ name: subpage.route }"
+            class="nav__item"
+          >
+            {{ subpage.label }}
+          </router-link>
+        </div>
+        <div class="main__nav--mobile">
+          <router-link
+            v-for="subpage in subpages.slice(0, 2)"
+            :key="subpage.route"
+            :to="{ name: subpage.route }"
+            class="nav__item"
+          >
+            {{ subpage.label }}
+          </router-link>
+        </div>
+        <div class="main__nav--mobile">
+          <router-link
+            v-for="subpage in subpages.slice(Math.max(subpages.length - 1, 0))"
             :key="subpage.route"
             :to="{ name: subpage.route }"
             class="nav__item"
@@ -60,7 +80,7 @@ export default {
         },
         {
           route: "investments-oneClickMasternode",
-          label: "Średnie spalanie"
+          label: "Zużycie paliwa"
         }
       ],
       modalAddCar: false
@@ -92,42 +112,56 @@ export default {
 }
 .main__bg {
   position: absolute;
-  width: 92%;
+  width: 90%;
   top: -8%;
-  margin: 0 4% 0 4%;
+  margin: 0 5% 0 5%;
   height: 1000px;
   background-color: white;
 }
-.main__nav {
-  height: 60px;
-  border-bottom: 1px solid rgba(15, 32, 108, 0.15);
+.main__nav--mobile {
   display: flex;
+  height: 80px;
+  border-bottom: 1px solid rgba(15, 32, 108, 0.15);
+}
+.main__nav--desktop {
+  height: 80px;
+  border-bottom: 1px solid rgba(15, 32, 108, 0.15);
+  display: none;
+}
 
-  .nav__item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    color: rgba(15, 32, 108, 0.65);
-    letter-spacing: 0;
-    margin-left: 40px;
+.nav__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: $color-purple2;
+  letter-spacing: 0;
+  margin-left: 40px;
 
-    &:hover,
-    &.router-link-exact-active {
-      color: #0f206c;
-      position: relative;
+  &:hover,
+  &.router-link-exact-active {
+    color: black;
+    position: relative;
 
-      &::after {
-        position: absolute;
-        content: "";
-        background-color: red;
-        display: block;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-      }
+    &::after {
+      content: "";
+      height: 2px;
+      width: 100%;
+      background: $color-red;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: width 1s ease;
     }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .main__nav--desktop {
+    display: flex;
+  }
+  .main__nav--mobile {
+    display: none;
   }
 }
 </style>

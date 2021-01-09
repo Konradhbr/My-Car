@@ -2,21 +2,23 @@
   <div>
     <div class="banner">
       <div class="banner__label">
-        <img src="" alt="" />
+        <img src="@/assets/images/fuel.png" alt="fuel" />
       </div>
       <span class="banner__title">
-        <h3>Kalkulator średniego spalania na 100 km</h3>
+        <h4>Kalkulator średniego spalania na 100 km</h4>
       </span>
       <div class="banner__button">
         <div class="dropbtn">
-          <button
+          <div
+            type="submit"
+            class="button"
             @click="
               isOpen = !isOpen;
               reset();
             "
           >
-            btn
-          </button>
+            <span>sprawdź</span>
+          </div>
         </div>
       </div>
     </div>
@@ -25,36 +27,39 @@
       :class="{ 'banner__calculate-active': isOpen }"
     >
       <div class="addValues">
-        <div class="addValues__fuel-amount">
-          <label for="fuelAmount">Spalone paliwo w litrach</label>
+        <div class="addValues__fuel-amount addValues__item">
+          <label for="fuelAmount">Spalone paliwo w litrach</label> <br />
           <input
             type="number"
             id="fuelAmount"
             name="fuelAmount"
             min="0.1"
             max="999999.0"
+            placeholder="np. 40"
             v-model="fuelAmount"
           />
         </div>
-        <div class="addValues__distance">
-          <label for="distance">Ilość przejechanych kilometrów </label>
+        <div class="addValues__distance addValues__item">
+          <label for="distance">Ilość przejechanych kilometrów </label><br />
           <input
             type="number"
             id="distance"
             name="distance"
             min="0.1"
             max="999999.0"
+            placeholder="np. 1000"
             v-model="distance"
           />
         </div>
-        <div class="addValues__fuel-prize">
-          <label for="fuelPrize">Cena litra paliwa </label>
+        <div class="addValues__fuel-prize addValues__item">
+          <label for="fuelPrize">Cena litra paliwa (zł) </label><br />
           <input
             type="number"
             id="fuelPrize"
             name="fuelPrize"
             min="0.01"
             max="100.00"
+            placeholder="np. 4.20"
             v-model="fuelPrize"
           />
         </div>
@@ -62,7 +67,10 @@
           <span>Oblicz</span>
         </button>
         <transition name="slide-fade">
-          <div v-if="show"><h2>hello</h2></div>
+          <div class="result" v-if="show">
+            <h3>Średnie spalanie auta</h3>
+            <h3>20i/100km</h3>
+          </div>
         </transition>
       </div>
     </div>
@@ -71,25 +79,25 @@
 
 <script>
 export default {
-  name: 'FuelConsumption',
+  name: "FuelConsumption",
   components: {},
   data() {
     return {
-      fuelAmount: 0,
-      fuelPrize: 0,
-      distance: 0,
+      fuelAmount: "",
+      fuelPrize: "",
+      distance: "",
       show: false,
-      isOpen: false,
+      isOpen: false
     };
   },
   methods: {
     reset() {
-      (this.fuelAmount = 0),
-        (this.fuelPrize = 0),
-        (this.distance = 0),
+      (this.fuelAmount = ""),
+        (this.fuelPrize = ""),
+        (this.distance = ""),
         (this.show = false);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -104,6 +112,9 @@ export default {
   border: 1px solid rgba(15, 32, 108, 0.15);
   border-bottom: 3px solid rgba(15, 32, 108, 0.3);
   margin-top: 30px;
+  background-color: $color-gray;
+  text-align: center;
+
   p {
     color: darkblue;
     line-height: 24px;
@@ -128,10 +139,20 @@ export default {
     padding-right: 50%;
   }
 }
+.banner__label {
+  margin: 40px 0;
+  text-align: center;
+  img {
+    width: 80px;
+  }
+}
 
 .banner__button {
-  float: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
   overflow: hidden;
+  margin-bottom: 30px;
   .dropbtn {
     display: block;
     width: fit-content;
@@ -147,7 +168,13 @@ export default {
   display: none;
   border: 1px solid rgba(15, 32, 108, 0.15);
   border-bottom: 3px solid red;
-  padding: 0 65px 65px 65px;
+  padding: 35px;
+}
+
+input {
+  height: 25px;
+  width: 120px;
+  margin-top: 15px;
 }
 .deposit__notification {
   display: none;
@@ -227,7 +254,24 @@ export default {
   flex-direction: column;
   width: 100%;
   height: auto;
-  background-color: green;
+
+  button {
+    margin-top: 13px;
+  }
+}
+.addValues__item {
+  margin-bottom: 25px;
+}
+.result {
+  margin-top: 70px;
+  h4,
+  h3 {
+    color: black;
+    margin-bottom: 20px;
+  }
+  p {
+    display: inline;
+  }
 }
 
 .slide-fade-enter-active {

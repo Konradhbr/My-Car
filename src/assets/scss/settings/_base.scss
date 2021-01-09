@@ -6,7 +6,7 @@ html {
 	margin: 0 !important;
 	padding: 0;
 	scroll-behavior: smooth;
-	//background-color: #E3E3E3;
+	background-color: #E3E3E3;
 	
 }
 .container {
@@ -247,3 +247,36 @@ li {
   }
 }
 
+// //=============================
+// //  [labels]
+// //=============================
+
+label {
+	color: black;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: $bold;
+	font-size: 20px;
+
+}
+
+// //=============================
+// //  [input]
+// //=============================
+input {
+	border: 1px solid $color-purple2;
+	font-size: 18px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: $normal;
+}
+input:focus {
+	border: 2.5px solid $color-purple1;
+	outline-width: 0;
+}
+
+// //=============================
+// //  [BASE CLASSES]
+// //=============================
+.underline--red {
+  text-decoration: underline;
+  text-decoration-color: $color-red;
+}

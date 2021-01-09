@@ -9,8 +9,8 @@
         <!-- <h3>sub text</h3> -->
       </div>
       <div class="calculators">
-        <div class="fuel"><FuelConsumption /></div>
-        <div class="lpg"><LPG /></div>
+        <div class="calculators__item fuel"><FuelConsumption /></div>
+        <div class="calculators__item lpg"><LPG /></div>
       </div>
     </div>
   </div>
@@ -49,14 +49,18 @@ export default {
   margin: 0;
   width: 100%;
   height: auto;
-  background-color: red;
+  //background-color: red;
 }
 .mainText {
   display: flex;
   flex-direction: column;
   text-align: center;
   width: 100%;
-  margin-top: 200px;
+  margin-top: 130px;
+
+  h3 {
+    color: black;
+  }
 }
 .calculators {
   display: flex;
@@ -77,6 +81,16 @@ export default {
   height: fit-content;
   width: 100%;
 }
+
+@media screen and (min-width: 1010px) {
+  .calculators {
+    flex-direction: row;
+  }
+  .calculators__item {
+    margin: 40px;
+  }
+}
+
 // .calculators_box {
 //   display: flex;
 //   flex-direction: column;

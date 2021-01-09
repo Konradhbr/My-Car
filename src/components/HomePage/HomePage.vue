@@ -8,7 +8,7 @@
           <h2>
             Zarządzaj swoim<br />
             autem
-            <span class="home__title--underline">online</span>
+            <span class="underline--red">online</span>
           </h2>
         </div>
         <div class="home__description">
@@ -76,10 +76,7 @@ export default {
 .home__title {
   margin-bottom: 100px;
 }
-.home__title--underline {
-  text-decoration: underline;
-  text-decoration-color: $color-red;
-}
+
 .home__icon {
   position: absolute;
   bottom: 120px;

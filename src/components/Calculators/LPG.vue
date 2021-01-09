@@ -8,15 +8,18 @@
         <h4>kalkulator opłacalności instalacji lpg</h4>
       </span>
       <div class="banner__button">
-        <button
-          class="button "
-          @click="
-            isOpen = !isOpen;
-            reset();
-          "
-        >
-          <span>btn</span>
-        </button>
+        <div class="dropbtn">
+          <div
+            type="submit"
+            class="button"
+            @click="
+              isOpen = !isOpen;
+              reset();
+            "
+          >
+            <span>sprawdź</span>
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -24,8 +27,8 @@
       :class="{ 'banner__calculate-active': isOpen }"
     >
       <div class="addValues">
-        <div class="addValues__petrol-price">
-          <label for="petrolPrice">Petrol price</label>
+        <div class="addValues__petrol-price addValues__item">
+          <label for="petrolPrice">Cena benzyny (zł)</label>
           <input
             type="number"
             id="petrolPrice"
@@ -33,10 +36,11 @@
             min="0.01"
             max="10.00"
             v-model="petrolPrice"
+            placeholder="np. 4.10"
           />
         </div>
-        <div class="addValues__lpg-price">
-          <label for="lpgPrice">LPG price</label>
+        <div class="addValues__lpg-price addValues__item">
+          <label for="lpgPrice">Cena LPG (zł)</label>
           <input
             type="number"
             id="lpgPrice"
@@ -44,17 +48,18 @@
             min="0.01"
             max="10.00"
             v-model="lpgPrice"
+            placeholder="np. 2.05"
           />
         </div>
-        <div>
+        <div class="addValues__item">
           <label for="petrolSlider">Średnie zużycie benzyny na 100 km:</label>
           <vue-slider v-model="petrolConsumption" />
         </div>
-        <div>
+        <div class="addValues__item">
           <label for="lpgSlider">Średnie zużycie gazu na 100 km:</label>
           <vue-slider v-model="lpgConsumption" />
         </div>
-        <div class="addValues__mileage-amount">
+        <div class="addValues__mileage-amount addValues__item">
           <label for="mileage">Śr. przebieg w miesiącu (km):</label>
           <input
             type="number"
@@ -63,18 +68,24 @@
             min="1"
             max="200000"
             v-model="mileage"
+            placeholder="np. 2000"
           />
         </div>
         <button type="submit" class="button" @click="show = !show">
           <span>Oblicz</span>
         </button>
         <transition name="slide-fade">
-          <div v-if="show">
-            <h2>Oszczędzasz</h2>
-            <h2><p>w miesiącu</p></h2>
-            <h2><p>w roku</p></h2>
-            <h2>Koszt montażu instalacji zwróci się po:</h2>
-            <span> miesiącach</span>
+          <div class="result" v-if="show">
+            <h3 class="underline--red">Oszczędzasz</h3>
+            <h4>
+              <p>w miesiącu</p>
+              300 zł
+            </h4>
+            <h4>
+              <p>w roku</p>
+              1000 zł
+            </h4>
+            <h4>Koszt montażu instalacji zwróci się po: miesiącach</h4>
             <p>Przyjęto średni koszt instalacji 3000 zł</p>
           </div>
         </transition>
@@ -94,9 +105,9 @@ export default {
   },
   data() {
     return {
-      petrolPrice: 0,
-      lpgPrice: 0,
-      mileage: 0,
+      petrolPrice: "",
+      lpgPrice: "",
+      mileage: "",
       petrolConsumption: 0,
       lpgConsumption: 0,
       show: false,
@@ -105,9 +116,9 @@ export default {
   },
   methods: {
     reset() {
-      (this.petrolPrice = 0),
-        (this.lpgPrice = 0),
-        (this.mileage = 0),
+      (this.petrolPrice = ""),
+        (this.lpgPrice = ""),
+        (this.mileage = ""),
         (this.petrolValue = 0),
         (this.lpgValue = 0),
         (this.show = false);
@@ -159,6 +170,7 @@ export default {
   justify-content: center;
   margin-top: 50px;
   overflow: hidden;
+  margin-bottom: 30px;
 
   .dropbtn {
     display: block;
@@ -175,8 +187,23 @@ export default {
   display: none;
   border: 1px solid rgba(15, 32, 108, 0.15);
   border-bottom: 3px solid red;
-  padding: 0 65px 65px 65px;
+  padding: 35px;
 }
+.addValues__item {
+  margin-bottom: 25px;
+}
+.addValues__mileage-amount {
+  input {
+    margin: 15px 0;
+    width: 150px;
+  }
+}
+input {
+  height: 25px;
+  width: 80px;
+  margin-left: 20px;
+}
+
 .deposit__notification {
   display: none;
 }
@@ -255,9 +282,19 @@ export default {
   flex-direction: column;
   width: 100%;
   height: auto;
-  background-color: green;
+  //background-color: green;
 }
-
+.result {
+  margin-top: 50px;
+  h4,
+  h3 {
+    color: black;
+    margin-bottom: 20px;
+  }
+  p {
+    display: inline;
+  }
+}
 .slide-fade-enter-active {
   transition: all 1.2s ease;
 }
