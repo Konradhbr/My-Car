@@ -136,7 +136,7 @@ export default {
   font-size: 20px;
   color: $color-purple2;
   letter-spacing: 0;
-  margin-left: 40px;
+  margin: 0 25px;
 
   &:hover,
   &.router-link-exact-active {

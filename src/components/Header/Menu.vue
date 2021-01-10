@@ -1,12 +1,12 @@
 <template>
   <nav :class="{ overlay__menu: isMobile }">
     <ul class="menu">
-      <li>
+      <li class="list__item">
         <router-link :to="{ name: 'Home' }">
           <a href="#">Strona główna</a>
         </router-link>
       </li>
-      <li>
+      <li class="list__item">
         <a
           class="link-off"
           :class="{ disable: user.loggedIn, active: !user.loggedIn }"
@@ -20,7 +20,7 @@
           <a>panel użytkownika</a>
         </router-link>
       </li>
-      <li>
+      <li class="list__item">
         <router-link :to="{ name: 'Home' }">
           <a href="#">Newsy</a>
         </router-link>
@@ -29,7 +29,7 @@
         <a href="#">subpage3</a>
       </li> -->
 
-      <li>
+      <li class="list__item">
         <router-link :to="{ name: 'Calculators' }">
           <a href="#">kalkulatory</a>
         </router-link>
@@ -186,26 +186,25 @@ export default {
     padding: 0px;
     li {
       padding: 30px 0px;
+      position: relative;
+      // &:hover {
+      //   &::after {
+      //     content: "";
+      //     height: 2px;
+      //     width: 100px;
+      //     background: red;
+      //     position: absolute;
+      //     bottom: 0;
+      //     left: 10px;
+      //     transition: width 1s ease;
+      //   }
+      // }
       a {
         position: relative;
         font-size: 24px;
         color: white;
         text-decoration: none;
         transition: all 0.5s;
-        &:hover {
-          &::after {
-            position: absolute;
-            background: none repeat scroll 0 0 transparent;
-            bottom: 0;
-            content: "";
-            display: block;
-            height: 2px;
-            left: 50%;
-            background: #fff;
-            transition: width 0.3s ease 0s, left 0.3s ease 0s;
-            width: 0;
-          }
-        }
       }
     }
   }
@@ -248,12 +247,26 @@ export default {
   .nav-link {
     text-transform: uppercase;
   }
-
   p,
   a {
     margin: 6px 20px 0 20px;
     text-align: left;
     color: white;
+  }
+}
+.list__item {
+  position: relative;
+  &:hover {
+    &::after {
+      content: "";
+      height: 2px;
+      width: 100%;
+      background: $color-red;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: width 1s ease;
+    }
   }
 }
 
@@ -311,6 +324,9 @@ export default {
     padding-left: 100px;
     li {
       margin: 0 20px;
+      display: flex;
+      align-items: center;
+      height: 100%;
       a {
         color: white;
         font-size: 15px;

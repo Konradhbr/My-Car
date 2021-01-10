@@ -21,7 +21,10 @@
         modalRegister = true;
         modalLogin = false;
       "
-      @openrecover="modalRecoverPassword = true"
+      @openrecover="
+        modalRecoverPassword = true;
+        modalLogin = false;
+      "
     />
     <ModalRegister
       v-if="modalRegister"
@@ -205,7 +208,7 @@ export default {
   }
 }
 .nav__hamburger {
-  z-index: 99999;
+  z-index: 12;
 }
 
 .nav__logo {

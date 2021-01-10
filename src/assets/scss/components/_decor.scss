@@ -6,7 +6,7 @@
   flex-direction: row;
   align-items: center;
   position: relative;
-  color: rgba(15, 32, 108, 0.7);
+  color: $color-purple1;
 
   &::after {
     margin-left: 20px;
@@ -48,17 +48,3 @@
     }
   }
 }
-
-
-
-// @media screen and (min-width: 1024) {
-//   .decor {
-//     // @include fluid-type($min_width, $max_width, 16px, 18px);
-//   }
-// }
-
-// @media screen and (min-width: $screen-md) {
-// }
-
-// @media screen and (min-width: $screen-lg) {
-// }

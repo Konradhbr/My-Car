@@ -1,27 +1,27 @@
 <template>
   <modal @close="close">
     <div class="modal__info">
-      <span class="decor">lorem</span>
+      <span class="decor">Logowanie</span>
 
       <div class="modal__text">
-        <h2>login</h2>
         <div v-if="error" class="alert alert-danger">{{ error }}</div>
 
         <form action="#" @submit.prevent="submit">
-          <label for="email">Email</label><br />
-          <input
-            id="email"
-            type="email"
-            class="form-control"
-            name="email"
-            value
-            required
-            autofocus
-            v-model="form.email"
-          />
-          <br />
-
-          <label for="password">Password</label><br />
+          <div class="email">
+            <label for="email">Email</label><br />
+            <input
+              id="email"
+              type="email"
+              class="form-control"
+              name="email"
+              value
+              required
+              autofocus
+              v-model="form.email"
+            />
+            <br />
+          </div>
+          <label for="password">Hasło</label><br />
           <input
             id="password"
             type="password"
@@ -31,16 +31,21 @@
             v-model="form.password"
           />
           <br />
-          <span
-            >Forgot password
-            <a href="#" @click="$emit('openrecover')">Recover password</a></span
-          >
+          <div class="forgetPasssword">
+            <span
+              >Zapomniałeś/aś hasła
+              <a href="#" @click="$emit('openrecover')"
+                >Przypomnij hasło</a
+              ></span
+            >
+          </div>
+
           <button type="submit" class="button button--full">
-            <span>login</span>
+            <span>Zaloguj</span>
           </button>
-          <p>or</p>
+          <p>lub</p>
           <button class="button button--full" @click="$emit('openregister')">
-            <span>create account</span>
+            <span>utworz konto</span>
           </button>
         </form>
       </div>
@@ -91,45 +96,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.modal__label {
-  display: flex;
-  padding: 60px 40px;
+.forgetPasssword {
+  margin: 20px 0;
 }
-
-.modal__text {
-  input[type="text"] {
-    font-size: 16px;
-  }
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  height: 50%;
-  margin: auto;
-  text-align: center;
-  margin-top: 40px;
-  margin-bottom: 40px;
-
-  p {
-    color: black;
-  }
-}
-
-.modal__info {
-  display: flex;
-  flex-direction: column;
-  padding: 50px;
-
-  h2 {
-    margin: 0 0 20px 0;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .modal__info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 50px 80px;
-  }
+.email {
+  margin-bottom: 20px;
 }
 </style>
