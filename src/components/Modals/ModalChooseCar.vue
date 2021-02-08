@@ -1,10 +1,10 @@
 <template>
-  <modalBasic :showCloseSign="false">
+  <modal @close="close">
     <div class="modal__info">
-      <span class="decor">lorem</span>
+      <span class="decor">Wybór auta</span>
       <div class="modal__text">
         <form action="#" @submit.prevent="submit">
-          <label for="cars">Wybierz auto</label>
+          <label for="cars">Wybierz auto</label><br />
           <select id="cars" name="cars">
             <option value="volvo">Volvo</option>
           </select>
@@ -17,16 +17,23 @@
         </button>
       </div>
     </div>
-  </modalBasic>
+  </modal>
 </template>
 
 <script>
-import ModalBasic from "@/components/Modals/ModalBasic.vue";
+import Modal from "@/components/Modals/Modal.vue";
 import firebase from "firebase";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ModalChooseCar",
-  components: { ModalBasic },
+  components: { Modal },
+  computed: {
+    // map `this.user` to `this.$store.getters.user`
+    ...mapGetters({
+      user: "user"
+    })
+  },
   data() {
     return {
       form: {
@@ -38,6 +45,9 @@ export default {
   },
   props: {},
   methods: {
+    close() {
+      this.$emit("close", true);
+    },
     submit() {
       firebase
         .auth()
@@ -54,4 +64,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+button {
+  margin-top: 20px;
+}
+</style>

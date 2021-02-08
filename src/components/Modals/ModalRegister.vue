@@ -1,30 +1,29 @@
 <template>
   <modal @close="close">
     <div class="modal__info">
-      <span class="decor">lorem</span>
+      <span class="decor">Rejestracja</span>
 
       <div class="modal__text">
-        <h2>register</h2>
         <div v-if="error" class="alert alert-danger">{{ error }}</div>
         <form action="#" @submit.prevent="submit">
-          <label for="email">Email</label><br />
+          <label for="email">E-mail</label><br />
           <input
             id="email"
             type="email"
             name="email"
-            value
+            value=""
             required
             autofocus
             v-model="form.email"
             placeholder="email"
           />
           <br />
-          <label for="password">password</label><br />
+          <label for="password">Hasło</label><br />
           <input
             id="password"
             type="password"
             name="password"
-            value
+            value=""
             required
             autofocus
             v-model="form.password"
@@ -39,11 +38,11 @@
             placeholder="Repeat password"
           /> -->
           <br />
-          <div class="modal__checkbox">
+          <!-- <div class="modal__checkbox">
             <Checkbox />
             <span class="req">*</span>
             <p>I have read and accept the terms of the agreement</p>
-          </div>
+          </div> -->
           <button
             type="submit"
             class="button button--full"
@@ -52,7 +51,6 @@
             <span>register</span>
           </button>
         </form>
-        <p><span>*</span> - lorem</p>
       </div>
     </div>
   </modal>
@@ -61,11 +59,11 @@
 <script>
 import firebase from "firebase";
 import Modal from "@/components/Modals/Modal.vue";
-import Checkbox from "@/components/Buttons/Checkbox.vue";
+//import Checkbox from "@/components/Buttons/Checkbox.vue";
 
 export default {
   name: "ModalRegister",
-  components: { Modal, Checkbox },
+  components: { Modal },
   data() {
     return {
       form: {

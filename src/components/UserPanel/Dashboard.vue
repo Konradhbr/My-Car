@@ -2,10 +2,9 @@
   <div v-if="user" class="dashboard">
     <div class="header">
       <div class="home__nav"><NavMenu /></div>
-      <div class="dashboard__bg"></div>
     </div>
     <div class="main">
-      <div class="main__bg">
+      <div class="main_content">
         <div class="main__nav--desktop">
           <router-link
             v-for="subpage in subpages"
@@ -36,12 +35,34 @@
             {{ subpage.label }}
           </router-link>
         </div>
+        <div
+          @click="modalChooseCar = !modalChooseCar"
+          class="chooseCar underline--red container"
+        >
+          <h5>Wybierz auto</h5>
+        </div>
+        <router-view></router-view>
+
+        <ModalChooseCar
+          v-if="modalChooseCar === true"
+          @openModalAddCar="modalAddCar = !modalAddCar"
+          @close="CloseModals()"
+        />
+        <ModalAddCar
+          v-if="modalAddCar === true"
+          @opensuccess="modalAddCarSuccess = !modalAddCarSuccess"
+          @close="CloseModals()"
+        />
+        <ModalAddCarSuccess
+          v-if="modalAddCarSuccess == true"
+          @close="CloseModals()"
+        />
+        <!-- </div> -->
       </div>
     </div>
-    <template v-if="user.choosenCar">
-      <ModalChooseCar @openModalAddCar="modalAddCar = !modalAddCar" />
-      <ModalAddCar v-if="modalAddCar" />
-    </template>
+    <!-- <template v-if="(modalChooseCar = true)">
+
+    </template> -->
   </div>
   <!-- <div v-if="user" class="alert alert-success" role="alert">
       </div> -->
@@ -53,13 +74,15 @@ import NavMenu from "../Header/NavMenu.vue";
 import { mapGetters } from "vuex";
 import ModalChooseCar from "../Modals/ModalChooseCar.vue";
 import ModalAddCar from "../Modals/ModalAddCar.vue";
+import ModalAddCarSuccess from "../Modals/ModalAddCarSuccess.vue";
 
 export default {
   name: "Dashboard",
   components: {
     NavMenu,
     ModalChooseCar,
-    ModalAddCar
+    ModalAddCar,
+    ModalAddCarSuccess
   },
   computed: {
     // map `this.user` to `this.$store.getters.user`
@@ -69,24 +92,35 @@ export default {
   },
   data() {
     return {
+      modalAddCar: false,
+      modalChooseCar: false,
+      modalAddCarSuccess: false,
       subpages: [
         {
-          route: "investments-smartDeposit",
+          route: "Dashboard-CarInfo",
           label: "Dane auta"
         },
         {
-          route: "investments-buyTokens",
+          route: "Dashboard-Service",
           label: "Serwis"
         },
         {
-          route: "investments-oneClickMasternode",
+          route: "Dashboard-FuelConsumption",
           label: "Zużycie paliwa"
         }
-      ],
-      modalAddCar: false
+      ]
     };
   },
-  methods: {}
+  methods: {
+    CloseModals() {
+      this.modalAddCar = false;
+      this.modalAddCarSuccess = false;
+      this.modalChooseCar = false;
+    }
+    // toogle() {
+    //   this.modalChooseCar = !this.modalChooseCar;
+    // }
+  }
 };
 </script>
 
@@ -95,8 +129,9 @@ export default {
   width: 100%;
   height: 100%;
   margin: 0;
+  // overflow-x: hidden;
 }
-.dashboard__bg {
+.header {
   width: 100%;
   height: 500px;
   background-image: url("../../assets/images/dashboard-bg.jpg");
@@ -105,17 +140,18 @@ export default {
 }
 
 .main {
-  position: relative;
   width: 100%;
-  height: 1000px;
-  background-color: silver;
+  height: 70%;
+  background-color: #e1dddd;
+  position: relative;
 }
-.main__bg {
+.main_content {
   position: absolute;
   width: 90%;
   top: -8%;
-  margin: 0 5% 0 5%;
-  height: 1000px;
+  margin: -81px 5% 0 5%;
+  padding-bottom: 39px;
+  height: auto;
   background-color: white;
 }
 .main__nav--mobile {
@@ -136,7 +172,7 @@ export default {
   font-size: 20px;
   color: $color-purple2;
   letter-spacing: 0;
-  margin: 0 25px;
+  margin: 0 30px;
 
   &:hover,
   &.router-link-exact-active {
@@ -156,12 +192,26 @@ export default {
   }
 }
 
+.chooseCar {
+  margin-top: 20px;
+  cursor: pointer;
+  h5 {
+    color: black;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .main__nav--desktop {
     display: flex;
   }
   .main__nav--mobile {
     display: none;
+  }
+}
+
+@media screen and (min-width: 1010px) {
+  .nav__item {
+    margin: 0 45px;
   }
 }
 </style>

@@ -1,21 +1,27 @@
 <template>
   <modal @close="close">
     <div class="modal__info">
-      <span class="decor">Reset hasła</span>
+      <span class="decor">Nowe hasło</span>
       <div class="modal__text">
         <form @submit.prevent="onSubmit()">
-          <label for="name">E-mail</label><br />
+          <label for="name">Hasło</label><br />
           <input
-            name="name"
-            type="email"
+            name="password"
+            type="text"
             value=""
-            v-model="form.email"
+            v-model="form.password"
             required
           />
           <br />
-          <button type="submit" class="button button--full" @click="sendEmail">
-            <span>zresetuj</span>
-          </button>
+          <router-link :to="{ name: Home }">
+            <button
+              type="submit"
+              class="button button--full"
+              @click="setPassword"
+            >
+              <span>Ustaw nowe hasło</span>
+            </button>
+          </router-link>
         </form>
       </div>
       <div
@@ -23,10 +29,11 @@
         :class="{ 'modal__message--active': recoverAlert }"
       >
         <p>
-          Link do zresetowania hasła został wysłany na powyższy adres e-mail
+          Hasło zmienione
         </p>
       </div>
     </div>
+    <router-view></router-view>
   </modal>
 </template>
 
@@ -41,10 +48,8 @@ export default {
     return {
       recoverAlert: false,
       form: {
-        email: ""
-      },
-      error: null,
-      emailSending: false
+        password: ""
+      }
     };
   },
   methods: {
@@ -52,9 +57,18 @@ export default {
       this.$emit("close", true);
     },
     onSubmit() {
-      this.recoverAlert = true;
+      firebase
+        .auth()
+        .updateCurrentUser(this.form.password)
+        .then(() => {
+          this.emailSending = false;
+        })
+        .catch(error => {
+          this.emailSending = false;
+          this.error = error.message;
+        });
     },
-    sendEmail() {
+    setPassword() {
       this.error = null;
       this.emailSending = true;
       firebase

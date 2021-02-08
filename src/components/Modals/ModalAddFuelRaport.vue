@@ -1,0 +1,215 @@
+<template>
+  <modal @close="$emit('close')">
+    <div class="modal__info">
+      <span class="decor">Dodaj raport</span>
+
+      <div class="modal__text">
+        <div v-if="error" class="alert alert-danger">{{ error }}</div>
+
+        <form action="#" @submit.prevent="submit">
+          <label for="brand">Spalone paliwo</label><br />
+          <input
+            id="fuelConsumption"
+            type="number"
+            class="form-control"
+            name="fuelConsumption"
+            value
+            autofocus
+            required
+            v-model="form.fuelConsumption"
+          />
+          <br />
+
+          <label for="model">Przejechane kilometry</label><br />
+          <input
+            id="kilometers"
+            type="number"
+            class="form-control"
+            name="kilometers"
+            required
+            v-model="form.kilometers"
+          />
+          <br /><br />
+          <label for="year">Typ trasy</label><br /><br />
+          <div class="row">
+            <div class="col">
+              <label class="radio radio-gradient">
+                <span class="radio__input">
+                  <input type="radio" name="radio" />
+                  <span class="radio__control"></span>
+                </span>
+                <span class="radio__label">Miasto</span>
+              </label>
+            </div>
+            <div class="col">
+              <label class="radio radio-gradient">
+                <span class="radio__input">
+                  <input type="radio" name="radio" />
+                  <span class="radio__control"></span>
+                </span>
+                <span class="radio__label">Trasa</span>
+              </label>
+            </div>
+            <div class="col">
+              <label class="radio radio-gradient">
+                <span class="radio__input">
+                  <input type="radio" name="radio" />
+                  <span class="radio__control"></span>
+                </span>
+                <span class="radio__label">Cykl mieszany</span>
+              </label>
+            </div>
+          </div>
+
+          <label for="mileage">Cena paliwa</label><br />
+          <input
+            id="fuelPrice"
+            type="number"
+            class="form-control"
+            name="fuelPrice"
+            required
+            v-model="form.fuelPrice"
+          />
+          <br />
+          <button type="submit" class="button button--full">
+            <span>Dodaj</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </modal>
+</template>
+
+<script>
+import Modal from "@/components/Modals/Modal.vue";
+//import firebase from "firebase";
+
+export default {
+  name: "ModalAddFuelRaport",
+  components: { Modal },
+  data() {
+    return {
+      form: {
+        fuelPrice: "",
+        roadType: "",
+        kilometers: "",
+        fuelConsumption: ""
+      },
+      error: null
+    };
+  },
+  props: {},
+  methods: {
+    submit() {
+      // firebase
+      //   .auth()
+      //   .signInWithEmailAndPassword(this.form.email, this.form.password)
+      //   // eslint-disable-next-line no-unused-vars
+      //   .then(data => {
+      //     this.$router.replace({ name: "Dashboard" });
+      //   })
+      //   .catch(err => {
+      //     this.error = err.message;
+      //   });
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+button {
+  margin-top: 20px;
+}
+input {
+  margin-bottom: 10px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+:root {
+  --color: rebeccapurple;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.radio {
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-gap: 0.5em;
+  font-size: 1.1rem;
+  color: var(--color);
+
+  &:focus-within {
+    .radio__label {
+      transform: scale(1.15);
+      opacity: 1;
+    }
+  }
+}
+
+.radio__label {
+  line-height: 1;
+  transition: 180ms all ease-in-out;
+  opacity: 0.8;
+}
+
+.radio__input {
+  display: flex;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:focus + .radio__control {
+      box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
+    }
+  }
+}
+
+.radio-gradient input:checked + .radio__control {
+  background: radial-gradient(currentcolor 50%, rgba(255, 0, 0, 0) 51%);
+}
+
+.radio-before {
+  .radio__control {
+    display: grid;
+    place-items: center;
+  }
+
+  input + .radio__control::before {
+    content: "";
+    width: 0.5em;
+    height: 0.5em;
+    box-shadow: inset 0.5em 0.5em currentColor;
+    border-radius: 50%;
+    transition: 180ms transform ease-in-out;
+    transform: scale(0);
+  }
+
+  input:checked + .radio__control::before {
+    transform: scale(1);
+  }
+}
+
+.radio__control {
+  display: block;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 0.1em solid currentColor;
+  transform: translateY(-0.05em);
+}
+</style>

@@ -27,6 +27,8 @@
       </div>
     </div>
     <div class="home__news">
+      <router-view></router-view>
+
       <div class="news-gradient"></div>
       <div class="news__description container">
         <h2 id="news" class="news--red">Newsy</h2>

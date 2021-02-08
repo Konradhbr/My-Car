@@ -4,6 +4,10 @@ import router from "./router";
 import store from "./store";
 import vuescroll from "vue-scroll";
 import firebase from "firebase";
+import Grid from "gridjs-vue";
+import VueApexCharts from "vue-apexcharts";
+
+// register VueFusionCharts component
 
 Vue.config.productionTip = false;
 
@@ -27,5 +31,7 @@ new Vue({
   router,
   store,
   vuescroll,
+  Grid,
+  VueApexCharts,
   render: h => h(App)
 }).$mount("#app");

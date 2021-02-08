@@ -9,8 +9,8 @@
         <!-- <h3>sub text</h3> -->
       </div>
       <div class="calculators">
-        <div class="calculators__item fuel"><FuelConsumption /></div>
-        <div class="calculators__item lpg"><LPG /></div>
+        <div class="calculators__item fuel"><FuelConsumptionCalculator /></div>
+        <div class="calculators__item lpg"><LPGCalculator /></div>
       </div>
     </div>
   </div>
@@ -18,15 +18,15 @@
 
 <script>
 import NavMenu from "../Header/NavMenu.vue";
-import LPG from "@/components/Calculators/LPG.vue";
-import FuelConsumption from "./FuelConsumption.vue";
+import LPGCalculator from "@/components/Calculators/LPGCalculator.vue";
+import FuelConsumptionCalculator from "./FuelConsumptionCalculator.vue";
 
 export default {
   name: "Calculators",
   components: {
     NavMenu,
-    LPG,
-    FuelConsumption
+    LPGCalculator,
+    FuelConsumptionCalculator
   }
 };
 </script>
@@ -34,7 +34,7 @@ export default {
 .calcPage {
   width: 100%;
   height: auto;
-  // background-color: red;
+  background-color: white;
 }
 .slide-enter,
 .slide-leave-to {

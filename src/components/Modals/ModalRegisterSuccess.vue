@@ -1,14 +1,13 @@
 <template>
   <modal @close="close">
     <div class="modal__info">
-      <span class="decor">Success</span>
+      <span class="decor">Sukces</span>
 
       <div class="modal__text">
         <div class="success-icon"><IconSuccess /></div>
-        <h2>Konto utworzone pomyślnie</h2>
+        <h3>Konto utworzone pomyślnie</h3>
         <p>
-          Rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum.
-          Integer aliquam purus. Quisque lorem tortor fringilla sed
+          Teraz możesz zalogować się na swoje konto i zarządzać autem online.
         </p>
         <button type="submit" class="button button--full" @close="close">
           <span>ok</span>
@@ -20,12 +19,13 @@
 
 <script>
 import Modal from "@/components/Modals/Modal.vue";
+import IconSuccess from "../Icons/IconSuccess.vue";
 
 export default {
   name: "ModalRegisterSuccess",
-  components: { Modal },
+  components: { Modal, IconSuccess },
   props: {
-    label: {
+    IconSuccesslabel: {
       type: String,
       required: true
     }
@@ -38,4 +38,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+h3 {
+  color: black;
+  margin-bottom: 20px;
+}
+p {
+  margin-bottom: 20px;
+}
+</style>

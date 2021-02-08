@@ -6,19 +6,24 @@ html {
 	margin: 0 !important;
 	padding: 0;
 	scroll-behavior: smooth;
-	background-color: #E3E3E3;
+	background-color: rgb(225, 221, 221);
 	
 }
 .container {
   width: 100%;
   height: fit-content;
-  padding: 0 5%;
+  padding: 0 30px;
 	overflow: hidden;
 	box-sizing: border-box;
 
   &::selection {
     background: none;
   }
+}
+@media screen and (min-width: $screen-sm) {
+	.container {
+		padding: 0 45px;
+}
 }
 // //=============================
 // //  [colors]
@@ -105,18 +110,18 @@ h2 {
 }
 
 h3 {
-  font-size: 28px;
+  font-size: 34px;
 
   @media screen and (max-width: $screen-sm) {
-    font-size: 34px;
+    font-size: 28px;
   }
 }
 
 h4 {
-  font-size: 18px;
+  font-size: 24px;
 
   @media screen and (max-width: $screen-sm) {
-    font-size: 24px;
+    font-size: 18px;
   }
 }
 
@@ -150,8 +155,10 @@ p {
 	font-weight: $normal;
 }
 
-@media screen and (min-width: $screen-sm) {
+@media screen and (max-width: $screen-sm) {
   p {
+		font-size: 16px;
+
   }
 }
 
@@ -261,9 +268,9 @@ label {
 }
 
 // //=============================
-// //  [input]
+// //  [input , select]
 // //=============================
-input {
+input,select {
 	border: 1px solid $color-purple2-40;
 	font-size: 18px;
 	font-family: 'Montserrat', sans-serif;
@@ -273,9 +280,14 @@ input {
 	height: 40px;
 	//width: 250px;
 }
-input:focus {
+input,select:focus {
 	border: 2.5px solid $color-purple1;
 	outline-width: 0;
+}
+
+select {
+	width: 100%;
+	max-width: 300px;
 }
 
 // //=============================

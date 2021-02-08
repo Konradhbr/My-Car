@@ -4,7 +4,7 @@
       <span class="decor">Logowanie</span>
 
       <div class="modal__text">
-        <div v-if="error" class="alert alert-danger">{{ error }}</div>
+        <div v-if="error != null" class="alert alert-danger">{{ error }}</div>
 
         <form action="#" @submit.prevent="submit">
           <div class="email">
@@ -40,14 +40,18 @@
             >
           </div>
 
-          <button type="submit" class="button button--full">
+          <button
+            type="submit"
+            @click="getUserStatus()"
+            class="button button--full"
+          >
             <span>Zaloguj</span>
           </button>
           <p>lub</p>
-          <button class="button button--full" @click="$emit('openregister')">
-            <span>utworz konto</span>
-          </button>
         </form>
+        <button class="button button--full" @click="$emit('openregister')">
+          <span>utworz konto</span>
+        </button>
       </div>
     </div>
   </modal>
@@ -56,6 +60,7 @@
 <script>
 import Modal from "@/components/Modals/Modal.vue";
 import firebase from "firebase";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ModalDepositSuccess",
@@ -75,6 +80,12 @@ export default {
     //   required: true
     // }
   },
+  computed: {
+    ...mapGetters({
+      // map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
+  },
   methods: {
     close() {
       this.$emit("close", true);
@@ -82,16 +93,36 @@ export default {
     submit() {
       firebase
         .auth()
-        .signInWithEmailAndPassword(this.form.email, this.form.password)
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
         // eslint-disable-next-line no-unused-vars
         .then(data => {
-          this.$router.replace({ name: "Dashboard" });
+          firebase
+            .auth()
+            .signInWithEmailAndPassword(this.form.email, this.form.password);
+          if (this.user.loggedIn) {
+            this.$router.push("Dashboard");
+
+            if (this.user.loggedIn) {
+              setTimeout(function() {
+                this.$router.push("Dashboard");
+              }, 2000);
+            }
+          }
         })
-        .catch(err => {
+        .catch(function(err) {
           this.error = err.message;
         });
+
+      // this.$router.push("Dashboard");
     }
+    // getUserStatus() {
+    //   if (this.user.loggedIn) {
+    //     setTimeout(function() {
+    //       this.$router.push("Dashboard");
+    //     }, 2000);
+    //   }
   }
+  // eslint-disable-next-line no-undef
 };
 </script>
 

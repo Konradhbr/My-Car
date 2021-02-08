@@ -22,7 +22,7 @@
       </li>
       <li class="list__item">
         <router-link :to="{ name: 'Home' }">
-          <a href="#">Newsy</a>
+          <a href="#news">Newsy</a>
         </router-link>
       </li>
       <!-- <li>

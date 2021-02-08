@@ -8,7 +8,7 @@ export default new Vuex.Store({
     user: {
       loggedIn: false,
       data: null,
-      choosenCar: false
+      firstOpenDashboard: false
     }
   },
   getters: {
@@ -23,8 +23,8 @@ export default new Vuex.Store({
     SET_USER(state, data) {
       state.user.data = data;
     },
-    SET_CHOOSEN_CAR(state, value) {
-      state.user.choosenCar = value;
+    SET_FIRST_OPEN_DASHBOARD(state, value) {
+      state.user.firstOpenDashboard = value;
     }
   },
   actions: {
@@ -40,7 +40,7 @@ export default new Vuex.Store({
       }
     },
     fetchChoosenCar({ commit }, value) {
-      commit("SET_CHOOSEN_CAR", value);
+      commit("SET_FIRST_OPEN_DASHBOARD", value);
     }
   },
   modules: {}

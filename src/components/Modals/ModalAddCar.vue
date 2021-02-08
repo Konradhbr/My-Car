@@ -1,10 +1,9 @@
 <template>
-  <modalBasic :closeSign="false">
+  <modal @close="$emit('close')">
     <div class="modal__info">
-      <span class="decor">lorem</span>
+      <span class="decor">Dodaj auto</span>
 
       <div class="modal__text">
-        <h2>Dodaj auto</h2>
         <div v-if="error" class="alert alert-danger">{{ error }}</div>
 
         <form action="#" @submit.prevent="submit">
@@ -59,7 +58,8 @@
             class="form-control"
             name="engine"
             required
-            pattern="[0-9.]{3}"
+            pattern="[0-9]+([\.,][0-9]+)?"
+            step="0.1"
             v-model="form.engine"
           />
           <br />
@@ -83,31 +83,32 @@
             v-model="form.review"
           />
           <br />
-          <button
-            type="submit"
-            class="button button--full"
-            @click="$emit('opensuccess')"
-          >
+          <button type="submit" class="button button--full">
             <span>Dodaj</span>
           </button>
         </form>
       </div>
     </div>
-  </modalBasic>
+  </modal>
 </template>
 
 <script>
-import ModalBasic from "@/components/Modals/ModalBasic.vue";
-import firebase from "firebase";
+import Modal from "@/components/Modals/Modal.vue";
+//import firebase from "firebase";
 
 export default {
   name: "ModalDepositSuccess",
-  components: { ModalBasic },
+  components: { Modal },
   data() {
     return {
       form: {
-        email: "",
-        password: ""
+        brand: "",
+        model: "",
+        year: "",
+        mileage: "",
+        engine: "",
+        insurance: "",
+        review: ""
       },
       error: null
     };
@@ -115,19 +116,27 @@ export default {
   props: {},
   methods: {
     submit() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.form.email, this.form.password)
-        // eslint-disable-next-line no-unused-vars
-        .then(data => {
-          this.$router.replace({ name: "Dashboard" });
-        })
-        .catch(err => {
-          this.error = err.message;
-        });
+      this.$emit("opensuccess");
+      // firebase
+      //   .auth()
+      //   .signInWithEmailAndPassword(this.form.email, this.form.password)
+      //   // eslint-disable-next-line no-unused-vars
+      //   .then(data => {
+      //     this.$router.replace({ name: "Dashboard" });
+      //   })
+      //   .catch(err => {
+      //     this.error = err.message;
+      //   });
     }
   }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+button {
+  margin-top: 20px;
+}
+input {
+  margin-bottom: 10px;
+}
+</style>

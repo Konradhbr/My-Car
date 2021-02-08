@@ -2,10 +2,10 @@
   <div>
     <div class="banner">
       <div class="banner__label">
-        <img src="@/assets/images/piggy-bank.png" alt="piggy-bank" />
+        <img src="@/assets/images/fuel.png" alt="fuel" />
       </div>
       <span class="banner__title">
-        <h4>kalkulator opłacalności instalacji lpg</h4>
+        <h4>Kalkulator średniego spalania na 100 km</h4>
       </span>
       <div class="banner__button">
         <div class="dropbtn">
@@ -27,48 +27,40 @@
       :class="{ 'banner__calculate-active': isOpen }"
     >
       <div class="addValues">
-        <div class="addValues__petrol-price addValues__item">
-          <label for="petrolPrice">Cena benzyny (zł)</label>
+        <div class="addValues__fuel-amount addValues__item">
+          <label for="fuelAmount">Spalone paliwo w litrach</label> <br />
           <input
             type="number"
-            id="petrolPrice"
-            name="petrolPrice"
-            min="0.01"
-            max="10.00"
-            v-model="petrolPrice"
-            placeholder="np. 4.10"
+            id="fuelAmount"
+            name="fuelAmount"
+            min="0.1"
+            max="999999.0"
+            placeholder="np. 40"
+            v-model="fuelAmount"
           />
         </div>
-        <div class="addValues__lpg-price addValues__item">
-          <label for="lpgPrice">Cena LPG (zł)</label>
+        <div class="addValues__distance addValues__item">
+          <label for="distance">Ilość przejechanych kilometrów </label><br />
           <input
             type="number"
-            id="lpgPrice"
-            name="lpgPrice"
-            min="0.01"
-            max="10.00"
-            v-model="lpgPrice"
-            placeholder="np. 2.05"
+            id="distance"
+            name="distance"
+            min="0.1"
+            max="999999.0"
+            placeholder="np. 1000"
+            v-model="distance"
           />
         </div>
-        <div class="addValues__item">
-          <label for="petrolSlider">Średnie zużycie benzyny na 100 km:</label>
-          <vue-slider v-model="petrolConsumption" />
-        </div>
-        <div class="addValues__item">
-          <label for="lpgSlider">Średnie zużycie gazu na 100 km:</label>
-          <vue-slider v-model="lpgConsumption" />
-        </div>
-        <div class="addValues__mileage-amount addValues__item">
-          <label for="mileage">Śr. przebieg w miesiącu (km):</label>
+        <div class="addValues__fuel-prize addValues__item">
+          <label for="fuelPrize">Cena litra paliwa (zł) </label><br />
           <input
             type="number"
-            id="mileage"
-            name="mileage"
-            min="1"
-            max="200000"
-            v-model="mileage"
-            placeholder="np. 2000"
+            id="fuelPrize"
+            name="fuelPrize"
+            min="0.01"
+            max="100.00"
+            placeholder="np. 4.20"
+            v-model="fuelPrize"
           />
         </div>
         <button type="submit" class="button" @click="show = !show">
@@ -76,17 +68,8 @@
         </button>
         <transition name="slide-fade">
           <div class="result" v-if="show">
-            <h3 class="underline--red">Oszczędzasz</h3>
-            <h4>
-              <p>w miesiącu</p>
-              300 zł
-            </h4>
-            <h4>
-              <p>w roku</p>
-              1000 zł
-            </h4>
-            <h4>Koszt montażu instalacji zwróci się po: miesiącach</h4>
-            <p>Przyjęto średni koszt instalacji 3000 zł</p>
+            <h3>Średnie spalanie auta</h3>
+            <h3>20i/100km</h3>
           </div>
         </transition>
       </div>
@@ -95,32 +78,23 @@
 </template>
 
 <script>
-import VueSlider from "vue-slider-component";
-import "vue-slider-component/theme/antd.css";
-
 export default {
-  name: "LPG",
-  components: {
-    VueSlider
-  },
+  name: "FuelConsumptionCalculator",
+  components: {},
   data() {
     return {
-      petrolPrice: "",
-      lpgPrice: "",
-      mileage: "",
-      petrolConsumption: 0,
-      lpgConsumption: 0,
+      fuelAmount: "",
+      fuelPrize: "",
+      distance: "",
       show: false,
       isOpen: false
     };
   },
   methods: {
     reset() {
-      (this.petrolPrice = ""),
-        (this.lpgPrice = ""),
-        (this.mileage = ""),
-        (this.petrolValue = 0),
-        (this.lpgValue = 0),
+      (this.fuelAmount = ""),
+        (this.fuelPrize = ""),
+        (this.distance = ""),
         (this.show = false);
     }
   }
@@ -132,12 +106,15 @@ export default {
   position: relative;
   width: 100%;
   height: auto;
-  background-color: $color-gray;
+  background-color: white;
   background-size: cover;
   overflow: hidden;
   border: 1px solid rgba(15, 32, 108, 0.15);
   border-bottom: 3px solid rgba(15, 32, 108, 0.3);
   margin-top: 30px;
+  background-color: $color-gray;
+  text-align: center;
+
   p {
     color: darkblue;
     line-height: 24px;
@@ -148,8 +125,13 @@ export default {
 }
 
 .banner__title {
-  h4 {
-    text-align: center;
+  h3 {
+    color: red;
+    font-size: 42px;
+    line-height: 52px;
+    text-align: left;
+    margin-bottom: 17px;
+    padding-right: 50%;
   }
 }
 .banner__description {
@@ -171,7 +153,6 @@ export default {
   margin-top: 50px;
   overflow: hidden;
   margin-bottom: 30px;
-
   .dropbtn {
     display: block;
     width: fit-content;
@@ -189,21 +170,12 @@ export default {
   border-bottom: 3px solid red;
   padding: 35px;
 }
-.addValues__item {
-  margin-bottom: 25px;
-}
-.addValues__mileage-amount {
-  input {
-    margin: 15px 0;
-    width: 150px;
-  }
-}
+
 input {
   height: 25px;
-  width: 80px;
-  margin-left: 20px;
+  width: 120px;
+  margin-top: 15px;
 }
-
 .deposit__notification {
   display: none;
 }
@@ -282,10 +254,16 @@ input {
   flex-direction: column;
   width: 100%;
   height: auto;
-  //background-color: green;
+
+  button {
+    margin-top: 13px;
+  }
+}
+.addValues__item {
+  margin-bottom: 25px;
 }
 .result {
-  margin-top: 50px;
+  margin-top: 70px;
   h4,
   h3 {
     color: black;
@@ -295,6 +273,7 @@ input {
     display: inline;
   }
 }
+
 .slide-fade-enter-active {
   transition: all 1.2s ease;
 }

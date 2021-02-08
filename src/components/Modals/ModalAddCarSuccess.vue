@@ -1,41 +1,42 @@
 <template>
-  <modal @close="close">
+  <modalBasic>
     <div class="modal__info">
-      <span class="decor">Success</span>
+      <span class="decor">Sukces</span>
 
       <div class="modal__text">
         <div class="success-icon"><IconSuccess /></div>
-        <h2>Auto dodane pomyślnie</h2>
-        <p>
-          Rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum.
-          Integer aliquam purus. Quisque lorem tortor fringilla sed
-        </p>
-        <button type="submit" class="button button--full" @close="close">
+        <h3>Auto dodane <span class="underline--red">pomyślnie</span></h3>
+        <button
+          type="submit"
+          class="button button--full"
+          @close="close"
+          @click="$emit('close')"
+        >
           <span>ok</span>
         </button>
       </div>
     </div>
-  </modal>
+  </modalBasic>
 </template>
 
 <script>
-import Modal from "@/components/Modals/Modal.vue";
+import ModalBasic from "@/components/Modals/ModalBasic.vue";
 
 export default {
   name: "ModalAddCarSuccess",
-  components: { Modal },
-  props: {
-    label: {
-      type: String,
-      required: true
-    }
-  },
+  components: { ModalBasic },
+  props: {},
   methods: {
-    close() {
-      this.$emit("close", true);
-    }
+    // close() {
+    //   this.$emit("close", true);
+    // }
   }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+h3 {
+  color: black;
+  margin-bottom: 20px;
+}
+</style>
