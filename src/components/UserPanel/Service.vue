@@ -3,7 +3,7 @@
     <div class="service__title">
       <h3>Dziennik serwisowy</h3>
       <h4>
-        Odiwedziłeś/aś ostatnio mechanika lub wymieniłeś/aś samemu jakąś część?
+        Odwiedziłeś/aś ostatnio mechanika lub wymieniłeś/aś samemu jakąś część?
         Dodaj ją do swojego dzienniczka online
       </h4>
     </div>

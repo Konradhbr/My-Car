@@ -22,57 +22,70 @@
         </div>
       </div>
     </div>
+
     <div
       class="profit__wrapper"
       :class="{ 'banner__calculate-active': isOpen }"
     >
-      <div class="addValues">
-        <div class="addValues__fuel-amount addValues__item">
-          <label for="fuelAmount">Spalone paliwo w litrach</label> <br />
-          <input
-            type="number"
-            id="fuelAmount"
-            name="fuelAmount"
-            min="0.1"
-            max="999999.0"
-            placeholder="np. 40"
-            v-model="fuelAmount"
-          />
-        </div>
-        <div class="addValues__distance addValues__item">
-          <label for="distance">Ilość przejechanych kilometrów </label><br />
-          <input
-            type="number"
-            id="distance"
-            name="distance"
-            min="0.1"
-            max="999999.0"
-            placeholder="np. 1000"
-            v-model="distance"
-          />
-        </div>
-        <div class="addValues__fuel-prize addValues__item">
-          <label for="fuelPrize">Cena litra paliwa (zł) </label><br />
-          <input
-            type="number"
-            id="fuelPrize"
-            name="fuelPrize"
-            min="0.01"
-            max="100.00"
-            placeholder="np. 4.20"
-            v-model="fuelPrize"
-          />
-        </div>
-        <button type="submit" class="button" @click="show = !show">
-          <span>Oblicz</span>
-        </button>
-        <transition name="slide-fade">
-          <div class="result" v-if="show">
-            <h3>Średnie spalanie auta</h3>
-            <h3>20i/100km</h3>
+      <form action="#" @submit.prevent="submit">
+        <div class="addValues">
+          <div class="addValues__fuel-amount addValues__item">
+            <label for="fuelAmount">Spalone paliwo w litrach</label> <br />
+            <input
+              type="number"
+              id="fuelAmount"
+              step="any"
+              name="fuelAmount"
+              placeholder="np. 40"
+              v-model="fuelAmount"
+              required
+            />
           </div>
-        </transition>
-      </div>
+          <div class="addValues__distance addValues__item">
+            <label for="distance">Ilość przejechanych kilometrów </label><br />
+            <input
+              type="number"
+              step="any"
+              id="distance"
+              name="distance"
+              placeholder="np. 1000"
+              v-model="distance"
+              required
+            />
+          </div>
+          <div class="addValues__fuel-prize addValues__item">
+            <label for="fuelPrize">Cena litra paliwa (zł) </label><br />
+            <input
+              type="number"
+              id="fuelPrize"
+              step="any"
+              name="fuelPrize"
+              placeholder="np. 4,20"
+              v-model="fuelPrize"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="button"
+            @click="(show = !show), result()"
+            :disabled="!checkInputs"
+          >
+            <span>Oblicz</span>
+          </button>
+          <transition name="slide-fade">
+            <div class="result" v-if="show">
+              <h3>Średnie spalanie auta</h3>
+              <h3>
+                {{ resultConsumption }} <span class="small">L</span> / 100km
+              </h3>
+              <br />
+              <h4>Średni koszt paliwa</h4>
+              <h4>{{ resultPrice }} ZŁ / 100km</h4>
+            </div>
+          </transition>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -87,7 +100,9 @@ export default {
       fuelPrize: "",
       distance: "",
       show: false,
-      isOpen: false
+      isOpen: false,
+      resultConsumption: "",
+      resultPrice: ""
     };
   },
   methods: {
@@ -96,6 +111,21 @@ export default {
         (this.fuelPrize = ""),
         (this.distance = ""),
         (this.show = false);
+    },
+    result() {
+      this.resultConsumption = (
+        (this.fuelAmount / this.distance) *
+        100
+      ).toFixed(1);
+      this.resultPrice = (this.resultConsumption * this.fuelPrize).toFixed(1);
+    }
+  },
+  computed: {
+    checkInputs: function() {
+      if ((this.fuelAmount && this.fuelPrize && this.distance) != "") {
+        return true;
+      }
+      return false;
     }
   }
 };
@@ -284,5 +314,8 @@ input {
 /* .slide-fade-leave-active below version 2.1.8 */ {
   transform: translateX(10px);
   opacity: 0;
+}
+.small {
+  text-transform: lowercase;
 }
 </style>

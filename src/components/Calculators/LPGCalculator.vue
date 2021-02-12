@@ -71,7 +71,12 @@
             placeholder="np. 2000"
           />
         </div>
-        <button type="submit" class="button" @click="show = !show">
+        <button
+          type="submit"
+          class="button"
+          @click="(show = !show), result()"
+          :disabled="!checkInputs"
+        >
           <span>Oblicz</span>
         </button>
         <transition name="slide-fade">
@@ -79,13 +84,15 @@
             <h3 class="underline--red">Oszczędzasz</h3>
             <h4>
               <p>w miesiącu</p>
-              300 zł
+              {{ saveMonth }} zł
             </h4>
             <h4>
               <p>w roku</p>
-              1000 zł
+              {{ saveYear }} zł
             </h4>
-            <h4>Koszt montażu instalacji zwróci się po: miesiącach</h4>
+            <h4>
+              Koszt montażu instalacji zwróci się po: {{ months }} miesiącach
+            </h4>
             <p>Przyjęto średni koszt instalacji 3000 zł</p>
           </div>
         </transition>
@@ -108,10 +115,15 @@ export default {
       petrolPrice: "",
       lpgPrice: "",
       mileage: "",
-      petrolConsumption: 0,
-      lpgConsumption: 0,
+      petrolConsumption: "",
+      lpgConsumption: "",
       show: false,
-      isOpen: false
+      isOpen: false,
+      saveYear: "",
+      saveMonth: "",
+      months: "",
+      lpgMonthlyPrice: "",
+      petrolMonthlyPrice: ""
     };
   },
   methods: {
@@ -119,9 +131,26 @@ export default {
       (this.petrolPrice = ""),
         (this.lpgPrice = ""),
         (this.mileage = ""),
-        (this.petrolValue = 0),
-        (this.lpgValue = 0),
+        (this.petrolValue = ""),
+        (this.lpgValue = ""),
         (this.show = false);
+    },
+    result() {
+      this.lpgMonthlyPrice =
+        (this.mileage / 100) * this.lpgConsumption * this.lpgPrice;
+      this.petrolMonthlyPrice =
+        (this.mileage / 100) * this.petrolConsumption * this.petrolPrice;
+      this.saveMonth = parseInt(this.petrolMonthlyPrice - this.lpgMonthlyPrice);
+      this.saveYear = parseInt(this.saveMonth * 12);
+      this.months = parseInt(3000 / this.saveMonth);
+    }
+  },
+  computed: {
+    checkInputs: function() {
+      if ((this.petrolPrice && this.lpgPrice && this.mileage) != "") {
+        return true;
+      }
+      return false;
     }
   }
 };

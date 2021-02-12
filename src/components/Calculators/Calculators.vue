@@ -1,16 +1,20 @@
 <template>
-  <div class="calcPage container">
-    <div class="home__nav">
-      <NavMenu :blackBG="true" />
-    </div>
-    <div class="content">
-      <div class="mainText">
-        <h3>lista kalkulatorów</h3>
-        <!-- <h3>sub text</h3> -->
+  <div class="calculate-page">
+    <div class="main container">
+      <div class="home__nav">
+        <NavMenu :blackBG="true" />
       </div>
-      <div class="calculators">
-        <div class="calculators__item fuel"><FuelConsumptionCalculator /></div>
-        <div class="calculators__item lpg"><LPGCalculator /></div>
+      <div class="content">
+        <div class="mainText">
+          <h3>lista kalkulatorów</h3>
+          <!-- <h3>sub text</h3> -->
+        </div>
+        <div class="calculators">
+          <div class="calculators__item fuel">
+            <FuelConsumptionCalculator />
+          </div>
+          <div class="calculators__item lpg"><LPGCalculator /></div>
+        </div>
       </div>
     </div>
   </div>
@@ -31,7 +35,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.calcPage {
+.calculate-page {
+  height: 100vh;
+  background-color: white;
+}
+.main {
   width: 100%;
   height: auto;
   background-color: white;

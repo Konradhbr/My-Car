@@ -129,6 +129,7 @@ export default {
   width: 100%;
   height: 100%;
   margin: 0;
+  background-color: rgb(225, 221, 221);
   // overflow-x: hidden;
 }
 .header {
@@ -142,7 +143,7 @@ export default {
 .main {
   width: 100%;
   height: 70%;
-  background-color: #e1dddd;
+  //background-color: #e1dddd;
   position: relative;
 }
 .main_content {

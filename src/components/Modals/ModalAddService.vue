@@ -11,6 +11,7 @@
             type="text"
             class="form-control"
             name="service"
+            placeholder="np. wymiana rozrządu"
             value
             autofocus
             required
@@ -23,6 +24,7 @@
             type="text"
             class="form-control"
             name="price"
+            placeholder="np. 2000"
             value
             autofocus
             required
@@ -32,7 +34,7 @@
           <label for="brand">Data</label><br />
           <input
             id="date"
-            type="text"
+            type="date"
             class="form-control"
             name="date"
             value

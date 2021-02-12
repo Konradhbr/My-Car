@@ -13,6 +13,7 @@
             type="text"
             class="form-control"
             name="brand"
+            placeholder="np. audi"
             value
             autofocus
             required
@@ -26,6 +27,7 @@
             type="text"
             class="form-control"
             name="model"
+            placeholder="np. A6"
             required
             v-model="form.model"
           />
@@ -36,6 +38,7 @@
             type="number"
             class="form-control"
             name="year"
+            placeholder="np. 2004"
             required
             pattern="[1-9]{4}"
             v-model="form.year"
@@ -47,6 +50,7 @@
             type="number"
             class="form-control"
             name="mileage"
+            placeholder="np. 400000"
             required
             v-model="form.mileage"
           />
@@ -57,6 +61,7 @@
             type="number"
             class="form-control"
             name="engine"
+            placeholder="np. 2.0"
             required
             pattern="[0-9]+([\.,][0-9]+)?"
             step="0.1"
@@ -83,7 +88,11 @@
             v-model="form.review"
           />
           <br />
-          <button type="submit" class="button button--full">
+          <button
+            type="submit"
+            class="button button--full"
+            @click.prevent="post"
+          >
             <span>Dodaj</span>
           </button>
         </form>
@@ -110,7 +119,8 @@ export default {
         insurance: "",
         review: ""
       },
-      error: null
+      error: null,
+      submitted: false
     };
   },
   props: {},
@@ -127,6 +137,17 @@ export default {
       //   .catch(err => {
       //     this.error = err.message;
       //   });
+    },
+    post: function() {
+      this.$http
+        .post(
+          "https://mycar-52e2a-default-rtdb.firebaseio.com/posts.json",
+          this.form
+        )
+        .then(function(data) {
+          console.log(data);
+          this.submitted = true;
+        });
     }
   }
 };

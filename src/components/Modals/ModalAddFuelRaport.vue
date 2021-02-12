@@ -13,6 +13,7 @@
             type="number"
             class="form-control"
             name="fuelConsumption"
+            placeholder="np. 40"
             value
             autofocus
             required
@@ -26,6 +27,7 @@
             type="number"
             class="form-control"
             name="kilometers"
+            placeholder="np. 100"
             required
             v-model="form.kilometers"
           />
@@ -67,6 +69,7 @@
             type="number"
             class="form-control"
             name="fuelPrice"
+            placeholder="np. 4.10"
             required
             v-model="form.fuelPrice"
           />

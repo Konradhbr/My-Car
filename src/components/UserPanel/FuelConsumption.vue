@@ -29,7 +29,7 @@
           class="service__content__button"
           @click="modalAddFuelRaport = true"
         >
-          <button class="button "><span>Dodaj</span></button>
+          <button class="button button--full"><span>Dodaj</span></button>
         </div>
         <div class="service__content__chart">
           <div><PieChart /></div>
@@ -94,10 +94,20 @@ export default {
 .service__content__chart {
   margin-top: 40px;
 }
+@media screen and (min-width: 820px) {
+  .service__content__button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .button {
+      width: 20%;
+    }
+  }
+}
 
 @media screen and (min-width: 1010px) {
   .service__content__top {
-    flex-direction: row;
     justify-content: space-between;
   }
   .fuel__consumption__title {
