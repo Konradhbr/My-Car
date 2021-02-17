@@ -91,7 +91,7 @@
           <button
             type="submit"
             class="button button--full"
-            @click.prevent="post"
+            @click.prevent="submit"
           >
             <span>Dodaj</span>
           </button>
@@ -102,8 +102,10 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import Modal from "@/components/Modals/Modal.vue";
-//import firebase from "firebase";
+import firebase from "firebase";
 
 export default {
   name: "ModalDepositSuccess",
@@ -124,9 +126,32 @@ export default {
     };
   },
   props: {},
+  computed: {
+    ...mapGetters({
+      // map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
+  },
   methods: {
     submit() {
+      firebase
+        .database()
+        .ref(
+          `${this.user.data.email.replace(".", ",")}/` +
+            "cars/" +
+            this.form.brand
+        )
+        .set({
+          brand: this.form.brand,
+          model: this.form.model,
+          year: this.form.year,
+          mileage: this.form.mileage,
+          engine: this.form.engine,
+          insurance: this.form.insurance,
+          review: this.form.review
+        });
       this.$emit("opensuccess");
+
       // firebase
       //   .auth()
       //   .signInWithEmailAndPassword(this.form.email, this.form.password)
@@ -137,17 +162,6 @@ export default {
       //   .catch(err => {
       //     this.error = err.message;
       //   });
-    },
-    post: function() {
-      this.$http
-        .post(
-          "https://mycar-52e2a-default-rtdb.firebaseio.com/posts.json",
-          this.form
-        )
-        .then(function(data) {
-          console.log(data);
-          this.submitted = true;
-        });
     }
   }
 };

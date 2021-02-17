@@ -63,10 +63,6 @@
         </div>
       </template>
     </ul>
-    <!-- <ModalAlertLogin
-      v-if="modalAlertLogin"
-      @close="this.modalAlertLogin = false"
-    /> -->
   </nav>
 </template>
 
@@ -74,7 +70,6 @@
 import firebase from "firebase";
 import { mapGetters } from "vuex";
 import User from "../Icons/User.vue";
-//import ModalAlertLogin from "../Modals/ModalAlertLogin.vue";
 
 export default {
   name: "Menu",

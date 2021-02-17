@@ -229,7 +229,7 @@ export default {
 }
 input {
   height: 25px;
-  width: 80px;
+  width: 100px;
   margin-left: 20px;
 }
 
