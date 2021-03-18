@@ -51,10 +51,15 @@
         <ModalAddCar
           v-if="modalAddCar === true"
           @opensuccess="modalAddCarSuccess = !modalAddCarSuccess"
+          @openfailed="modalAddCarFailed = !modalAddCarFailed"
           @close="CloseModals()"
         />
         <ModalAddCarSuccess
           v-if="modalAddCarSuccess == true"
+          @close="CloseModals()"
+        />
+        <ModalAddCarFailed
+          v-if="modalAddCarFailed == true"
           @close="CloseModals()"
         />
         <!-- </div> -->
@@ -75,6 +80,7 @@ import { mapGetters } from "vuex";
 import ModalChooseCar from "../Modals/ModalChooseCar.vue";
 import ModalAddCar from "../Modals/ModalAddCar.vue";
 import ModalAddCarSuccess from "../Modals/ModalAddCarSuccess.vue";
+import ModalAddCarFailed from "../Modals/ModalAddCarFailed.vue";
 
 export default {
   name: "Dashboard",
@@ -82,7 +88,8 @@ export default {
     NavMenu,
     ModalChooseCar,
     ModalAddCar,
-    ModalAddCarSuccess
+    ModalAddCarSuccess,
+    ModalAddCarFailed
   },
   computed: {
     // map `this.user` to `this.$store.getters.user`
@@ -95,6 +102,7 @@ export default {
       modalAddCar: false,
       modalChooseCar: false,
       modalAddCarSuccess: false,
+      modalAddCarFailed: false,
       subpages: [
         {
           route: "Dashboard-CarInfo",
@@ -111,15 +119,21 @@ export default {
       ]
     };
   },
+  mounted() {
+    this.firstOpen();
+  },
   methods: {
     CloseModals() {
       this.modalAddCar = false;
       this.modalAddCarSuccess = false;
+      this.modalAddCarFailed = false;
       this.modalChooseCar = false;
+    },
+    async firstOpen() {
+      if (this.user.firstOpenDashboard === true) {
+        this.modalChooseCar = true;
+      }
     }
-    // toogle() {
-    //   this.modalChooseCar = !this.modalChooseCar;
-    // }
   }
 };
 </script>

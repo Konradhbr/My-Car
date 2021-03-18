@@ -13,8 +13,8 @@
           <h4>Całkowity koszt wydatków (zł)</h4>
           <h3>1200</h3>
         </div>
-        <div class="service__content__button" @click="modalAddService = true">
-          <button class="button button--full">
+        <div class="service__content__button">
+          <button class="button button--full" @click="modalAddService = true">
             <span>Dodaj</span>
           </button>
         </div>
@@ -25,19 +25,24 @@
         </div>
       </div>
     </div>
-    <modal-add-service
-      v-if="modalAddService"
-      @close="modalAddService = false"
-    />
+    <ModalAddService v-if="modalAddService" @close="modalAddService = false" />
   </div>
 </template>
 
 <script>
 import ModalAddService from "../Modals/ModalAddService.vue";
 import Table from "./Table.vue";
+//import { mapGetters } from "vuex";
+
 export default {
   components: { Table, ModalAddService },
   name: "Service",
+  // computed: {
+  //   ...mapGetters({
+  //     // map `this.user` to `this.$store.getters.user`
+  //     user: "user"
+  //   })
+  // },
   data() {
     return {
       modalAddService: false

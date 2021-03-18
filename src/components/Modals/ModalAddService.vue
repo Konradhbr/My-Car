@@ -54,12 +54,20 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import Modal from "@/components/Modals/Modal.vue";
-//import firebase from "firebase";
+import firebase from "firebase";
 
 export default {
   name: "ModalDepositSuccess",
   components: { Modal },
+  computed: {
+    ...mapGetters({
+      // map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
+  },
   data() {
     return {
       form: {
@@ -70,9 +78,24 @@ export default {
       error: null
     };
   },
+
   props: {},
   methods: {
     submit() {
+      firebase
+        .database()
+        .ref(
+          `${this.user.data.email.replace(".", ",")}/` +
+            "cars/" +
+            `${this.user.activeCar}/` +
+            "service/" +
+            `${this.form.service}`
+        )
+        .set({
+          service: this.form.service,
+          price: this.form.price,
+          date: this.form.date
+        });
       this.$emit("opensuccess");
     }
   }

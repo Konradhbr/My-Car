@@ -10,9 +10,9 @@
       </thead>
       <tbody>
         <tr v-for="(row, index) in filteredRows" :key="`employee-${index}`">
-          <td v-html="highlightMatches(row.action)"></td>
+          <td v-html="highlightMatches(row.service)"></td>
           <td v-html="highlightMatches(row.price)"></td>
-          <td v-html="highlightMatches(row.data)"></td>
+          <td v-html="highlightMatches(row.date)"></td>
         </tr>
       </tbody>
     </table>
@@ -26,16 +26,31 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import firebase from "firebase";
+
 export default {
   name: "Table",
-  data: function() {
+  // props: {
+  //   items: {
+  //     type: Array,
+  //     required: true
+  //   }
+  // },
+  created() {
+    this.setService();
+    console.log(this.rows);
+  },
+  data() {
     return {
       filter: "",
       rows: [
         {
-          action: "Accounting",
-          price: "12",
-          data: "12.12.12"
+					date: "12.12.12",
+					price: "12",
+          service: "Accounting",
+
+
         }
       ]
     };
@@ -49,21 +64,43 @@ export default {
 
       const re = new RegExp(this.filter, "ig");
       return text.replace(re, matchedText => `<strong>${matchedText}</strong>`);
-    }
+    },
+     async setService() {
+      var service = firebase
+        .database()
+        .ref(
+          `${this.user.data.email.replace(".", ",")}/` +
+            "cars/" +
+            `${this.user.activeCar}/` +
+            "service/"
+        );
+      service.on("value", snapshot => {
+        const data = snapshot.val();
+
+        for (var i in data) {
+          console.log(data.[i]);
+    			this.rows.push(data.[i])
+        }
+      });
+    },
   },
   computed: {
+    ...mapGetters({
+      // map `this.user` to `this.$store.getters.user`
+      user: "user"
+    }),
     filteredRows() {
       return this.rows.filter(row => {
         const price = row.price;
-        const action = row.action.toLowerCase();
-        const data = row.data;
+        const service = row.service.toLowerCase();
+        const date = row.date;
 
         const searchTerm = this.filter.toLowerCase();
 
         return (
-          action.includes(searchTerm) ||
+          service.includes(searchTerm) ||
           price.includes(searchTerm) ||
-          data.includes(searchTerm)
+          date.includes(searchTerm)
         );
       });
     }

@@ -8,7 +8,8 @@ export default new Vuex.Store({
     user: {
       loggedIn: false,
       data: null,
-      firstOpenDashboard: false
+      firstOpenDashboard: true,
+      activeCar: null
     }
   },
   getters: {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     },
     SET_FIRST_OPEN_DASHBOARD(state, value) {
       state.user.firstOpenDashboard = value;
+    },
+    SET_ACTIVE_CAR(state, value) {
+      state.user.activeCar = value;
     }
   },
   actions: {
@@ -41,6 +45,9 @@ export default new Vuex.Store({
     },
     fetchChoosenCar({ commit }, value) {
       commit("SET_FIRST_OPEN_DASHBOARD", value);
+    },
+    fetchActivedCar({ commit }, value) {
+      commit("SET_ACTIVE_CAR", value);
     }
   },
   modules: {}

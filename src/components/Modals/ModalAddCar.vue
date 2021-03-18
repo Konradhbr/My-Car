@@ -122,46 +122,74 @@ export default {
         review: ""
       },
       error: null,
-      submitted: false
+      submitted: false,
+      id: null,
+      carCounter: undefined
     };
   },
   props: {},
   computed: {
     ...mapGetters({
-      // map `this.user` to `this.$store.getters.user`
       user: "user"
     })
   },
+  created() {
+    this.counter();
+  },
   methods: {
     submit() {
-      firebase
-        .database()
-        .ref(
-          `${this.user.data.email.replace(".", ",")}/` +
-            "cars/" +
-            this.form.brand
-        )
-        .set({
-          brand: this.form.brand,
-          model: this.form.model,
-          year: this.form.year,
-          mileage: this.form.mileage,
-          engine: this.form.engine,
-          insurance: this.form.insurance,
-          review: this.form.review
-        });
-      this.$emit("opensuccess");
+      if (this.carCounter === 5) {
+        this.$emit("openfailed");
+      } else {
+        firebase
+          .database()
+          .ref(
+            `${this.user.data.email.replace(".", ",")}/` +
+              "cars/" +
+              `${this.carCounter + 1}/`
+          )
+          .set({
+            brand: this.form.brand,
+            model: this.form.model,
+            year: this.form.year,
+            mileage: this.form.mileage,
+            engine: this.form.engine,
+            insurance: this.form.insurance,
+            review: this.form.review
+          });
+        this.$emit("opensuccess");
+      }
+    },
+    // firebase
+    //   .database()
+    //   .ref(
+    //     `${this.user.data.email.replace(".", ",")}/` +
+    //       "cars/" +
+    //       `${this.carCounter + 1}/`
+    //   )
+    //   .set({
+    //     brand: this.form.brand,
+    //     model: this.form.model,
+    //     year: this.form.year,
+    //     mileage: this.form.mileage,
+    //     engine: this.form.engine,
+    //     insurance: this.form.insurance,
+    //     review: this.form.review
+    //   });
 
-      // firebase
-      //   .auth()
-      //   .signInWithEmailAndPassword(this.form.email, this.form.password)
-      //   // eslint-disable-next-line no-unused-vars
-      //   .then(data => {
-      //     this.$router.replace({ name: "Dashboard" });
-      //   })
-      //   .catch(err => {
-      //     this.error = err.message;
-      //   });
+    //}
+
+    async counter() {
+      var ref = firebase
+        .database()
+        .ref(`${this.user.data.email.replace(".", ",")}/cars`); // gdy let results = await nie było dodane to return zwracał promise function. trzeba było dodać await
+      let results = await ref.once("value").then(function(snapshot) {
+        var refAmount = snapshot.numChildren(); // 1 ("name")
+        console.log(refAmount);
+        return refAmount;
+      });
+
+      this.carCounter = results;
     }
   }
 };

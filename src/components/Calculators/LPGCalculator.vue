@@ -142,7 +142,7 @@ export default {
         (this.mileage / 100) * this.petrolConsumption * this.petrolPrice;
       this.saveMonth = parseInt(this.petrolMonthlyPrice - this.lpgMonthlyPrice);
       this.saveYear = parseInt(this.saveMonth * 12);
-      this.months = parseInt(3000 / this.saveMonth);
+      this.months = parseInt(3000 / this.saveMonth + 1);
     }
   },
   computed: {

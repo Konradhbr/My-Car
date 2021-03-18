@@ -1,11 +1,14 @@
 <template>
   <modalBasic>
     <div class="modal__info">
-      <span class="decor">Sukces</span>
+      <span class="decor">Błąd</span>
 
       <div class="modal__text">
-        <div class="success-icon"><IconSuccess /></div>
-        <h3>Auto dodane <span class="underline--red">pomyślnie</span></h3>
+        <div class="success-icon"><IconFail /></div>
+        <h4>
+          Niestety nie udało się dodać auta. Możesz posiadać w swoim garażu
+          <span class="underline--red">maksymalnie 5 aut</span>
+        </h4>
         <button
           type="submit"
           class="button button--full"
@@ -21,11 +24,10 @@
 
 <script>
 import ModalBasic from "@/components/Modals/ModalBasic.vue";
-import IconSuccess from "@/components/Icons/IconSuccess.vue";
-
+import IconFail from "@/components/Icons/IconFail.vue";
 export default {
-  name: "ModalAddCarSuccess",
-  components: { ModalBasic, IconSuccess },
+  name: "ModalAddCarFailed",
+  components: { ModalBasic, IconFail },
   props: {},
   methods: {
     // close() {
@@ -36,7 +38,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h3 {
+h3,
+h4 {
   color: black;
   margin-bottom: 20px;
 }
