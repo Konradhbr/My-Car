@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
+//import * as Cookies from "js-cookie";
 
 Vue.use(Vuex);
 
@@ -29,6 +31,8 @@ export default new Vuex.Store({
     },
     SET_ACTIVE_CAR(state, value) {
       state.user.activeCar = value;
+
+      // this.commit("saveData");
     }
   },
   actions: {
@@ -50,5 +54,6 @@ export default new Vuex.Store({
       commit("SET_ACTIVE_CAR", value);
     }
   },
+  plugins: [createPersistedState()],
   modules: {}
 });

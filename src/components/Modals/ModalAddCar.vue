@@ -108,7 +108,7 @@ import Modal from "@/components/Modals/Modal.vue";
 import firebase from "firebase";
 
 export default {
-  name: "ModalDepositSuccess",
+  name: "ModalAddCar",
   components: { Modal },
   data() {
     return {

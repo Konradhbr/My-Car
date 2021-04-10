@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="home__news">
-      <router-view></router-view>
+      <router-view :key="$route.fullPath"></router-view>
 
       <div class="news-gradient"></div>
       <div class="news__description container">
@@ -37,7 +37,7 @@
           oraz ciekawostki ze świata motoryzacji
         </h4>
       </div>
-      <div id="news" class="home__news"><News /></div>
+      <div id="news" class="home__news"><News ref="news" /></div>
     </div>
   </div>
 </template>
@@ -53,6 +53,11 @@ export default {
     VideoBackground,
     NavMenu,
     News
+  },
+  created() {
+    if (this.$route.name === "Home") {
+      this.$refs.news;
+    }
   },
   methods: {}
 };

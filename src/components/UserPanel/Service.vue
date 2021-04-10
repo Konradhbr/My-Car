@@ -10,8 +10,8 @@
     <div class="service__content">
       <div class="service__content__top">
         <div class="service__content__sum">
-          <h4>Całkowity koszt wydatków (zł)</h4>
-          <h3>1200</h3>
+          <h4>Całkowity koszt wydatków</h4>
+          <h3>{{ result }} zł</h3>
         </div>
         <div class="service__content__button">
           <button class="button button--full" @click="modalAddService = true">
@@ -32,22 +32,49 @@
 <script>
 import ModalAddService from "../Modals/ModalAddService.vue";
 import Table from "./Table.vue";
-//import { mapGetters } from "vuex";
+import { mapGetters } from "vuex";
+import firebase from "firebase";
+
 
 export default {
   components: { Table, ModalAddService },
   name: "Service",
-  // computed: {
-  //   ...mapGetters({
-  //     // map `this.user` to `this.$store.getters.user`
-  //     user: "user"
-  //   })
-  // },
+  computed: {
+    ...mapGetters({
+      // map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
+  },
   data() {
     return {
-      modalAddService: false
+      modalAddService: false,
+			result: null,
     };
-  }
+  },
+	created() {
+		this.setResult();
+		console.log(this.result)
+	},
+	methods: {
+ async setResult() {
+      var service = firebase
+        .database()
+        .ref(
+          `${this.user.data.email.replace(".", ",")}/` +
+            "cars/" +
+            `${this.user.activeCar}/` +
+            "service/"
+        );
+      service.on("value", snapshot => {
+        const data = snapshot.val();
+
+        for (var i in data) {
+					this.result += parseInt(data.[i].price)
+    			//this.rows.push(data.[i])
+        }
+      });
+    },
+	}
 };
 </script>
 

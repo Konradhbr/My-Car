@@ -8,13 +8,16 @@
           <select id="cars" name="cars" v-model="selected">
             <option v-for="car in carsCollection" :key="car">{{ car }}</option>
           </select>
-          <button type="submit" class="button button--full" @click="submit">
-            <span>Wybierz</span>
-          </button>
+          <router-link :to="{ name: 'Dashboard-CarInfo' }">
+            <button type="submit" class="button button--full" @click="submit">
+              <span>Wybierz</span>
+            </button>
+          </router-link>
         </form>
         <button class="button button--full" @click="$emit('openModalAddCar')">
           <span>Dodaj nowe auto</span>
         </button>
+        <p>{{ prefs }}</p>
       </div>
     </div>
   </modal>
@@ -32,11 +35,15 @@ export default {
     // map `this.user` to `this.$store.getters.user`
     ...mapGetters({
       user: "user"
-    })
-    // setActiveCar() {
-    //   // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-    //   return (this.user.activeCar = this.selected);
-    // }
+    }),
+    prefs: function() {
+      var data = {
+        car: this.selected,
+        openModal: false
+      };
+      localStorage.setItem("data", JSON.stringify(data));
+      return data;
+    }
   },
   data() {
     return {
@@ -52,7 +59,16 @@ export default {
   mounted() {
     this.chooseCar();
   },
-  props: {},
+  created: function() {
+    var loaded = JSON.parse(localStorage.getItem("data"));
+    if (loaded) {
+      console.log(loaded);
+      this.user.activeCar = loaded.car;
+      this.user.firstOpenDashboard = loaded.openModal;
+    } else {
+      console.log("not loaded");
+    }
+  },
   methods: {
     close() {
       this.$emit("close", true);
@@ -73,9 +89,6 @@ export default {
       }
       this.$emit("close");
     }
-    // async setActiveCar() {
-    //   this.user.activeCar = this.selected;
-    // }
   }
 };
 </script>

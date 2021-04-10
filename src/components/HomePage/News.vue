@@ -19,6 +19,7 @@
 export default {
   name: "News",
   created() {
+    //location.reload(false);
     // eslint-disable-next-line no-unused-vars
     async src => "https://www.feedgrabbr.com/widget/fgwidget.js";
     let fg_widgets;

@@ -1,7 +1,7 @@
 <template>
   <nav :class="{ overlay__menu: isMobile }">
     <ul class="menu">
-      <li class="list__item">
+      <li class="list__item" @click="reloadHome">
         <router-link :to="{ name: 'Home' }">
           <a href="#">Strona główna</a>
         </router-link>
@@ -14,14 +14,14 @@
           >panel użytkownika</a
         >
         <router-link
-          :to="{ name: 'Dashboard' }"
+          :to="{ name: 'Dashboard-CarInfo' }"
           :class="{ disable: !user.loggedIn, active: user.loggedIn }"
         >
           <a>panel użytkownika</a>
         </router-link>
       </li>
-      <li class="list__item">
-        <router-link :to="{ name: 'Home' }">
+      <li class="list__item" @click="reloadNews()">
+        <router-link :to="{ name: 'News', reloadNews }">
           <a href="#news">Newsy</a>
         </router-link>
       </li>
@@ -96,6 +96,17 @@ export default {
   },
 
   methods: {
+    reloadHome() {
+      if (this.$route.name === "Home") {
+        this.$router.go(0);
+        //window.scrollTo(0, 0);
+      } else {
+        return true;
+      }
+    },
+    reloadNews() {
+      this.$router.go();
+    },
     // eslint-disable-next-line no-unused-vars
     getWindowWidth(event) {
       const windowWidth = document.documentElement.clientWidth;
@@ -116,6 +127,9 @@ export default {
             name: "Home"
           });
         });
+
+      this.user.firstOpenDashboard = true;
+      this.user.activeCar = null;
     }
     // showAlertLogin() {
     //   this.modalAlertLogin = true;

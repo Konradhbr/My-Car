@@ -44,18 +44,18 @@ export default {
   },
   data() {
     return {
-      carName: "",
-      insuranceDate: "",
-      reviewDate: "",
-      year: "",
-      mileage: "",
-      engine: "",
-      activeCar: this.user.activeCar
+      carName: null,
+      insuranceDate: null,
+      reviewDate: null,
+      year: null,
+      mileage: null,
+      engine: null,
+      activeCar: null
     };
   },
-  mounted() {
+  created() {
     this.setCar();
-    console.log(this.carName);
+    //console.log(this.carName);
   },
   methods: {
     async setCar() {

@@ -14,6 +14,7 @@
             class="form-control"
             name="fuelConsumption"
             placeholder="np. 40"
+            step="0.1"
             value
             autofocus
             required
@@ -28,6 +29,7 @@
             class="form-control"
             name="kilometers"
             placeholder="np. 100"
+            step="0.1"
             required
             v-model="form.kilometers"
           />
@@ -37,7 +39,13 @@
             <div class="col">
               <label class="radio radio-gradient">
                 <span class="radio__input">
-                  <input type="radio" name="radio" />
+                  <input
+                    type="radio"
+                    name="radio"
+                    id="miasto"
+                    value="Miasto"
+                    v-model="form.roadType"
+                  />
                   <span class="radio__control"></span>
                 </span>
                 <span class="radio__label">Miasto</span>
@@ -46,7 +54,13 @@
             <div class="col">
               <label class="radio radio-gradient">
                 <span class="radio__input">
-                  <input type="radio" name="radio" />
+                  <input
+                    type="radio"
+                    name="radio"
+                    id="trasa"
+                    value="Trasa"
+                    v-model="form.roadType"
+                  />
                   <span class="radio__control"></span>
                 </span>
                 <span class="radio__label">Trasa</span>
@@ -55,7 +69,13 @@
             <div class="col">
               <label class="radio radio-gradient">
                 <span class="radio__input">
-                  <input type="radio" name="radio" />
+                  <input
+                    type="radio"
+                    name="radio"
+                    id="cyklMieszany"
+                    value="Cykl mieszany"
+                    v-model="form.roadType"
+                  />
                   <span class="radio__control"></span>
                 </span>
                 <span class="radio__label">Cykl mieszany</span>
@@ -69,6 +89,7 @@
             type="number"
             class="form-control"
             name="fuelPrice"
+            step="0.01"
             placeholder="np. 4.10"
             required
             v-model="form.fuelPrice"
@@ -85,16 +106,23 @@
 
 <script>
 import Modal from "@/components/Modals/Modal.vue";
-//import firebase from "firebase";
+import firebase from "firebase";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ModalAddFuelRaport",
   components: { Modal },
+  computed: {
+    ...mapGetters({
+      // map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
+  },
   data() {
     return {
       form: {
         fuelPrice: "",
-        roadType: "",
+        roadType: undefined,
         kilometers: "",
         fuelConsumption: ""
       },
@@ -104,16 +132,22 @@ export default {
   props: {},
   methods: {
     submit() {
-      // firebase
-      //   .auth()
-      //   .signInWithEmailAndPassword(this.form.email, this.form.password)
-      //   // eslint-disable-next-line no-unused-vars
-      //   .then(data => {
-      //     this.$router.replace({ name: "Dashboard" });
-      //   })
-      //   .catch(err => {
-      //     this.error = err.message;
-      //   });
+      firebase
+        .database()
+        .ref(
+          `${this.user.data.email.replace(".", ",")}/` +
+            "cars/" +
+            `${this.user.activeCar}/` +
+            "fuel-raport/" +
+            `${this.form.kilometers}`
+        )
+        .set({
+          fuelPrice: this.form.fuelPrice,
+          roadType: this.form.roadType,
+          kilometers: this.form.kilometers,
+          fuelConsumption: this.form.fuelConsumption
+        });
+      this.$emit("close");
     }
   }
 };

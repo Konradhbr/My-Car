@@ -60,7 +60,7 @@ import Modal from "@/components/Modals/Modal.vue";
 import firebase from "firebase";
 
 export default {
-  name: "ModalDepositSuccess",
+  name: "ModalAddService",
   components: { Modal },
   computed: {
     ...mapGetters({
@@ -96,7 +96,7 @@ export default {
           price: this.form.price,
           date: this.form.date
         });
-      this.$emit("opensuccess");
+      this.$emit("close");
     }
   }
 };

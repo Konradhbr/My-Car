@@ -40,11 +40,7 @@
             >
           </div>
 
-          <button
-            type="submit"
-            @click="getUserStatus()"
-            class="button button--full"
-          >
+          <button type="submit" class="button button--full">
             <span>Zaloguj</span>
           </button>
           <p>lub</p>
@@ -52,6 +48,9 @@
         <button class="button button--full" @click="$emit('openregister')">
           <span>utworz konto</span>
         </button>
+        <div v-if="this.error !== null" class="errors">
+          <p>{{ form.error }}</p>
+        </div>
       </div>
     </div>
   </modal>
@@ -63,15 +62,16 @@ import firebase from "firebase";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "ModalDepositSuccess",
+  name: "ModalLogin",
   components: { Modal },
   data() {
     return {
+      error: null,
       form: {
         email: "",
-        password: ""
-      },
-      error: null
+        password: "",
+        error: null
+      }
     };
   },
   props: {
@@ -86,9 +86,18 @@ export default {
       user: "user"
     })
   },
+  created() {
+    this.goToDashboard();
+  },
   methods: {
     close() {
       this.$emit("close", true);
+    },
+    async goToDashboard() {
+      if (this.user.loggedIn) {
+        this.close();
+        this.$router.push("Dashboard");
+      }
     },
     submit() {
       firebase
@@ -99,30 +108,22 @@ export default {
           firebase
             .auth()
             .signInWithEmailAndPassword(this.form.email, this.form.password);
-          if (this.user.loggedIn) {
-            this.$router.push("Dashboard");
-
-            if (this.user.loggedIn) {
-              setTimeout(function() {
-                this.$router.push("Dashboard");
-              }, 2000);
-            }
-          }
         })
-        .catch(function(err) {
-          this.error = err.message;
+        .catch(error => {
+          //console.log(error.message);
+          this.form.error = error.message;
         });
 
-      // this.$router.push("Dashboard");
+      // if (this.user.loggedIn) {
+      //   this.close();
+      //   this.$router.push("Dashboard");
+      // }
+      if (this.user.loggedIn) {
+        this.close();
+        this.$router.push("Dashboard");
+      }
     }
-    // getUserStatus() {
-    //   if (this.user.loggedIn) {
-    //     setTimeout(function() {
-    //       this.$router.push("Dashboard");
-    //     }, 2000);
-    //   }
   }
-  // eslint-disable-next-line no-undef
 };
 </script>
 
@@ -132,5 +133,12 @@ export default {
 }
 .email {
   margin-bottom: 20px;
+}
+.errors {
+  margin-top: 15px;
+  p {
+    font-size: 15px;
+    color: $color-red;
+  }
 }
 </style>

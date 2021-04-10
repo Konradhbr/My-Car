@@ -132,6 +132,9 @@ export default {
     async firstOpen() {
       if (this.user.firstOpenDashboard === true) {
         this.modalChooseCar = true;
+        //this.user.firstOpenDashboard = false;
+      } else {
+        this.modalChooseCar = false;
       }
     }
   }
