@@ -21,7 +21,7 @@
       <div class="home__icon">
         <div class="icon">
           <a href="#news" id="goNews">
-            <img class="iconScroll" alt="scroll" />
+            <img src="@/assets/images/scroll-icon.png" alt="scroll" />
           </a>
         </div>
       </div>
@@ -102,9 +102,7 @@ export default {
   height: 100vh;
   opacity: 0.7;
 }
-.iconScroll {
-  background-image: url("/src/assets/images/scroll-icon.png");
-}
+
 .home__news {
   position: relative;
   display: flex;

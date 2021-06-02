@@ -2,7 +2,7 @@
   <div>
     <div class="banner">
       <div class="banner__label">
-        <img class="iconPiggy" alt="piggy-bank" />
+        <img src="@/assets/images/piggy-bank.png" alt="piggy-bank" />
       </div>
       <span class="banner__title">
         <h4>kalkulator opłacalności instalacji lpg</h4>
@@ -175,9 +175,7 @@ export default {
 .padding-zero {
   padding-bottom: 0;
 }
-.iconPiggy {
-  background-image: url("/src/assets/images/piggy-bank.png");
-}
+
 .banner__title {
   h4 {
     text-align: center;
