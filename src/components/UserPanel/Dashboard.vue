@@ -77,10 +77,10 @@
 import NavMenu from "../Header/NavMenu.vue";
 
 import { mapGetters } from "vuex";
-import ModalChooseCar from "../Modals/ModalChooseCar.vue";
-import ModalAddCar from "../Modals/ModalAddCar.vue";
-import ModalAddCarSuccess from "../Modals/ModalAddCarSuccess.vue";
-import ModalAddCarFailed from "../Modals/ModalAddCarFailed.vue";
+import ModalChooseCar from "@/components/Modals/ModalChooseCar.vue";
+import ModalAddCar from "@/components/Modals/ModalAddCar.vue";
+import ModalAddCarSuccess from "@/components/Modals/ModalAddCarSuccess.vue";
+import ModalAddCarFailed from "@/components/Modals/ModalAddCarFailed.vue";
 
 export default {
   name: "Dashboard",
@@ -152,7 +152,7 @@ export default {
 .header {
   width: 100%;
   height: 500px;
-  background-image: url("../../assets/images/dashboard-bg.jpg");
+  background-image: url("/src/assets/images/dashboard-bg.jpg");
   background-position: center;
   background-size: cover;
 }
