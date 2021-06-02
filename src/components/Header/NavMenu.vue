@@ -2,7 +2,7 @@
   <nav class="nav" :class="{ 'nav--black': isBlack }">
     <div class="nav__logo">
       <router-link :to="{ name: 'Home' }">
-        <img src="@/assets/images/logo.png" alt="icon" />
+        <img class="iconLogo" alt="icon" />
       </router-link>
     </div>
     <div class="nav__menu">
@@ -138,6 +138,10 @@ export default {
   img {
     height: 80px;
   }
+}
+
+.iconLogo {
+  background-image: url("/src/assets/images/logo.png");
 }
 .nav__hamburger {
   background: transparent;
