@@ -6,7 +6,7 @@
       <div class="modal__text">
         <div v-if="error" class="alert alert-danger">{{ error }}</div>
 
-        <form action="#" @submit.prevent="submit">
+        <form action="#" @submit.prevent="AddCar">
           <label for="brand">Marka auta</label><br />
           <input
             id="brand"
@@ -91,7 +91,7 @@
           <button
             type="submit"
             class="button button--full"
-            @click.prevent="submit"
+            @click.prevent="AddCar"
           >
             <span>Dodaj</span>
           </button>
@@ -124,7 +124,7 @@ export default {
       error: null,
       submitted: false,
       id: null,
-      carCounter: undefined
+      carCounter: null
     };
   },
   props: {},
@@ -137,7 +137,7 @@ export default {
     this.counter();
   },
   methods: {
-    submit() {
+    AddCar() {
       if (this.carCounter === 5) {
         this.$emit("openfailed");
       } else {
@@ -146,7 +146,7 @@ export default {
           .ref(
             `${this.user.data.email.replace(".", ",")}/` +
               "cars/" +
-              `${this.carCounter + 1}/`
+              `${(this.carCounter + 1, this.form.model)}/`
           )
           .set({
             brand: this.form.brand,
@@ -160,32 +160,12 @@ export default {
         this.$emit("opensuccess");
       }
     },
-    // firebase
-    //   .database()
-    //   .ref(
-    //     `${this.user.data.email.replace(".", ",")}/` +
-    //       "cars/" +
-    //       `${this.carCounter + 1}/`
-    //   )
-    //   .set({
-    //     brand: this.form.brand,
-    //     model: this.form.model,
-    //     year: this.form.year,
-    //     mileage: this.form.mileage,
-    //     engine: this.form.engine,
-    //     insurance: this.form.insurance,
-    //     review: this.form.review
-    //   });
-
-    //}
-
     async counter() {
       var ref = firebase
         .database()
         .ref(`${this.user.data.email.replace(".", ",")}/cars`); // gdy let results = await nie było dodane to return zwracał promise function. trzeba było dodać await
       let results = await ref.once("value").then(function(snapshot) {
-        var refAmount = snapshot.numChildren(); // 1 ("name")
-        console.log(refAmount);
+        var refAmount = snapshot.numChildren();
         return refAmount;
       });
 

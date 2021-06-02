@@ -5,7 +5,7 @@
 
       <div class="modal__text">
         <div v-if="error" class="alert alert-danger">{{ error }}</div>
-        <form action="#" @submit.prevent="submit">
+        <form action="#" @submit.prevent="register">
           <label for="email">E-mail</label><br />
           <input
             id="email"
@@ -15,7 +15,6 @@
             required
             autofocus
             v-model="form.email"
-            placeholder="email"
           />
           <br />
           <label for="password">Hasło</label><br />
@@ -27,22 +26,8 @@
             required
             autofocus
             v-model="form.password"
-            placeholder="password"
           />
           <br />
-          <!-- <label for="name">Repeat password</label><br />
-          <input
-            name="password"
-            type="text"
-            v-model="repeatPassword"
-            placeholder="Repeat password"
-          /> -->
-          <br />
-          <!-- <div class="modal__checkbox">
-            <Checkbox />
-            <span class="req">*</span>
-            <p>I have read and accept the terms of the agreement</p>
-          </div> -->
           <button
             type="submit"
             class="button button--full"
@@ -59,7 +44,6 @@
 <script>
 import firebase from "firebase";
 import Modal from "@/components/Modals/Modal.vue";
-//import Checkbox from "@/components/Buttons/Checkbox.vue";
 
 export default {
   name: "ModalRegister",
@@ -77,7 +61,7 @@ export default {
     close() {
       this.$emit("close", true);
     },
-    submit() {
+    register() {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.form.email, this.form.password)

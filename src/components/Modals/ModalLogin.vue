@@ -6,7 +6,7 @@
       <div class="modal__text">
         <div v-if="error != null" class="alert alert-danger">{{ error }}</div>
 
-        <form action="#" @submit.prevent="submit">
+        <form action="#" @submit.prevent="login">
           <div class="email">
             <label for="email">Email</label><br />
             <input
@@ -74,15 +74,9 @@ export default {
       }
     };
   },
-  props: {
-    // label: {
-    //   type: String,
-    //   required: true
-    // }
-  },
+  props: {},
   computed: {
     ...mapGetters({
-      // map `this.user` to `this.$store.getters.user`
       user: "user"
     })
   },
@@ -99,7 +93,7 @@ export default {
         this.$router.push("Dashboard");
       }
     },
-    submit() {
+    login() {
       firebase
         .auth()
         .setPersistence(firebase.auth.Auth.Persistence.SESSION)
@@ -110,14 +104,8 @@ export default {
             .signInWithEmailAndPassword(this.form.email, this.form.password);
         })
         .catch(error => {
-          //console.log(error.message);
           this.form.error = error.message;
         });
-
-      // if (this.user.loggedIn) {
-      //   this.close();
-      //   this.$router.push("Dashboard");
-      // }
       if (this.user.loggedIn) {
         this.close();
         this.$router.push("Dashboard");

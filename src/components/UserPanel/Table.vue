@@ -31,12 +31,6 @@ import firebase from "firebase";
 
 export default {
   name: "Table",
-  // props: {
-  //   items: {
-  //     type: Array,
-  //     required: true
-  //   }
-  // },
   created() {
     this.setService();
     console.log(this.rows);
@@ -44,15 +38,7 @@ export default {
   data() {
     return {
       filter: "",
-      rows: [
-        {
-					date: "12.12.12",
-					price: "12",
-          service: "Accounting",
-
-
-        }
-      ]
+      rows: []
     };
   },
   methods: {

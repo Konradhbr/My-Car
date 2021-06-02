@@ -70,7 +70,6 @@ export default {
 
         for (var i in data) {
 					this.result += parseInt(data.[i].price)
-    			//this.rows.push(data.[i])
         }
       });
     },

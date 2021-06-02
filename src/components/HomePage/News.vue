@@ -3,14 +3,10 @@
     <div class="publications">
       <h2 class="container">Publikacje</h2>
       <div class="feedgrabbr_widget" id="fgid_210708a2263cbe8bb30d72a2a"></div>
-      <!-- <script> if (typeof fg_widgets === "undefined") fg_widgets = new Array(); fg_widgets.push("fgid_210708a2263cbe8bb30d72a2a"); </script>
-<script async src="https://www.feedgrabbr.com/widget/fgwidget.js"></script> -->
     </div>
     <div class="news">
       <h2 class="container">Newsy</h2>
       <div class="feedgrabbr_widget" id="fgid_0cbd3a82693bdaba787db32ef"></div>
-      <!-- <script>if (typeof (fg_widgets) === "undefined") fg_widgets = new Array(); fg_widgets.push("fgid_0cbd3a82693bdaba787db32ef");</script>
-<script async src="https://www.feedgrabbr.com/widget/fgwidget.js"></script> -->
     </div>
   </div>
 </template>
@@ -19,7 +15,6 @@
 export default {
   name: "News",
   created() {
-    //location.reload(false);
     // eslint-disable-next-line no-unused-vars
     async src => "https://www.feedgrabbr.com/widget/fgwidget.js";
     let fg_widgets;
