@@ -2,7 +2,8 @@
   <div>
     <div class="banner">
       <div class="banner__label">
-        <img src="@/assets/images/fuel.png" alt="fuel" />
+        <!-- <img src="@/assets/images/fuel.png" alt="fuel" class="fuelIcon" /> -->
+        <img class="fuelIcon" />
       </div>
       <span class="banner__title">
         <h4>Kalkulator średniego spalania na 100 km</h4>
@@ -150,6 +151,11 @@ export default {
     line-height: 24px;
   }
 }
+
+.fuelIcon {
+  background-image: url("/src/assets/images/fuel.png");
+}
+
 .padding-zero {
   padding-bottom: 0;
 }
