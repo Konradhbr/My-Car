@@ -2,7 +2,7 @@
   <nav class="nav" :class="{ 'nav--black': isBlack }">
     <div class="nav__logo">
       <router-link :to="{ name: 'Home' }">
-        <img src="@/assets/images/logo.png" alt="" />
+        <img src="src\assets\images\fuel.png" alt="icon" />
       </router-link>
     </div>
     <div class="nav__menu">
