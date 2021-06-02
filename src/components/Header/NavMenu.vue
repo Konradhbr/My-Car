@@ -2,7 +2,7 @@
   <nav class="nav" :class="{ 'nav--black': isBlack }">
     <div class="nav__logo">
       <router-link :to="{ name: 'Home' }">
-        <img src="src\assets\images\fuel.png" alt="icon" />
+        <img src="/images/fuel.png" alt="icon" />
       </router-link>
     </div>
     <div class="nav__menu">
@@ -42,7 +42,7 @@ import ModalLogin from "@/components/Modals/ModalLogin.vue";
 import ModalRegister from "@/components/Modals/ModalRegister.vue";
 import ModalRegisterSuccess from "@/components/Modals/ModalRegisterSuccess.vue";
 import ModalRecoverPassword from "@/components/Modals/ModalRecoverPassword.vue";
-import ModalAlertLogin from "../Modals/ModalAlertLogin.vue";
+import ModalAlertLogin from "@/components/Modals/ModalAlertLogin.vue";
 
 import Menu from "./Menu.vue";
 
