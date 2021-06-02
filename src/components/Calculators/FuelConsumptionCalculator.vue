@@ -2,7 +2,7 @@
   <div>
     <div class="banner">
       <div class="banner__label">
-        <img src="@/assets/images/fuel.png" alt="fuel" />
+        <img src="@/assets/icons/fuel.svg" alt="fuel" />
       </div>
       <span class="banner__title">
         <h4>Kalkulator średniego spalania na 100 km</h4>
