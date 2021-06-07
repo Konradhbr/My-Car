@@ -2,7 +2,7 @@
   <div>
     <div class="banner">
       <div class="banner__label">
-        <!-- <img src="../../assets/icons/piggy-bank.svg" alt="piggy-bank" /> -->
+        <img src="@/assets/Icons/piggy-bank.svg" alt="piggy-bank" />
       </div>
       <span class="banner__title">
         <h4>kalkulator opłacalności instalacji lpg</h4>

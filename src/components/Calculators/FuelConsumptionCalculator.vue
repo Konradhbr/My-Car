@@ -2,7 +2,7 @@
   <div>
     <div class="banner">
       <div class="banner__label">
-        <!-- <img src="../../assets/icons/fuel.svg" alt="fuel" /> -->
+        <img src="@/assets/Icons/fuel.svg" alt="fuel" />
       </div>
       <span class="banner__title">
         <h4>Kalkulator średniego spalania na 100 km</h4>
@@ -102,7 +102,8 @@ export default {
       show: false,
       isOpen: false,
       resultConsumption: "",
-      resultPrice: ""
+      resultPrice: "",
+      variable: ""
     };
   },
   methods: {

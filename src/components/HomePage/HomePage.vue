@@ -21,7 +21,7 @@
       <div class="home__icon">
         <div class="icon">
           <a href="#news" id="goNews">
-            <img src="../../assets/icons/scroll-icon.svg" alt="scroll" />
+            <img src="@/assets/Icons/scroll-icon.svg" alt="scrol" />
           </a>
         </div>
       </div>

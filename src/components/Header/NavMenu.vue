@@ -70,7 +70,7 @@ export default {
       modalRecoverPassword: false,
       isBlack: this.blackBG,
       modalAlertLogin: false,
-      logo: { title: "logo", icon: require("@/assets/images/logo.png") }
+      logo: { title: "logo", icon: require("@/assets/Images/logo.png") }
     };
   },
   methods: {
