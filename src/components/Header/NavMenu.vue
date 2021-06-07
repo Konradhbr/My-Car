@@ -2,7 +2,7 @@
   <nav class="nav" :class="{ 'nav--black': isBlack }">
     <div class="nav__logo">
       <router-link :to="{ name: 'Home' }">
-        <img src="../../assets/images/logo.png" alt="icon" />
+        <img :src="logo.icon" alt="icon" />
       </router-link>
     </div>
     <div class="nav__menu">
@@ -45,7 +45,6 @@ import ModalRecoverPassword from "@/components/Modals/ModalRecoverPassword.vue";
 import ModalAlertLogin from "@/components/Modals/ModalAlertLogin.vue";
 
 import Menu from "./Menu.vue";
-//import IconLogo from "@/components/Icons/IconLogo.vue";
 
 export default {
   name: "NavMenu",
@@ -56,7 +55,6 @@ export default {
     ModalRegisterSuccess,
     ModalRecoverPassword,
     ModalAlertLogin
-    // IconLogo
   },
   props: {
     blackBG: {
@@ -71,7 +69,8 @@ export default {
       modalRegisterSuccess: false,
       modalRecoverPassword: false,
       isBlack: this.blackBG,
-      modalAlertLogin: false
+      modalAlertLogin: false,
+      logo: { title: "logo", icon: require("@/assets/images/logo.png") }
     };
   },
   methods: {

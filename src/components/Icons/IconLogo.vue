@@ -12,7 +12,7 @@ export default {
 .logo {
   width: 80px;
   height: 80px;
-  background-image: url("/src/assets/images/logo.png");
+  background-image: url(/src/assets/images/logo.png);
   z-index: 10;
 }
 </style>
