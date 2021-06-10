@@ -24,60 +24,60 @@
 </template>
 
 <script>
-import Modal from "@/components/Modals/Modal.vue";
-import firebase from "firebase";
-import { mapGetters } from "vuex";
+import Modal from '@/components/Modals/Modal.vue';
+import firebase from 'firebase';
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "ModalChooseCar",
+  name: 'ModalChooseCar',
   components: { Modal },
   computed: {
     // map `this.user` to `this.$store.getters.user`
     ...mapGetters({
-      user: "user"
+      user: 'user',
     }),
     prefs: function() {
       var data = {
         car: this.selected,
-        openModal: false
+        openModal: false,
       };
-      localStorage.setItem("data", JSON.stringify(data));
+      localStorage.setItem('data', JSON.stringify(data));
       return data;
-    }
+    },
   },
   data() {
     return {
       form: {
-        email: "",
-        password: ""
+        email: '',
+        password: '',
       },
       error: null,
       carsCollection: [],
-      selected: null
+      selected: null,
     };
   },
   mounted() {
     this.chooseCar();
   },
   created: function() {
-    var loaded = JSON.parse(localStorage.getItem("data"));
+    var loaded = JSON.parse(localStorage.getItem('data'));
     if (loaded) {
       console.log(loaded);
       this.user.activeCar = loaded.car;
       this.user.firstOpenDashboard = loaded.openModal;
     } else {
-      console.log("not loaded");
+      console.log('not loaded');
     }
   },
   methods: {
     close() {
-      this.$emit("close", true);
+      this.$emit('close', true);
     },
     async chooseCar() {
       var starCountRef = firebase
         .database()
-        .ref(`${this.user.data.email.replace(".", ",")}/` + "cars");
-      starCountRef.on("value", snapshot => {
+        .ref(`${this.user.data.email.replace('.', ',')}/` + 'cars');
+      starCountRef.on('value', (snapshot) => {
         const data = snapshot.val();
         this.carsCollection = Object.keys(data);
       });
@@ -87,9 +87,10 @@ export default {
       if (this.user.activeCar !== null) {
         this.user.firstOpenDashboard = false;
       }
-      this.$emit("close");
-    }
-  }
+      this.$router.push(`/${this.selected}`);
+      this.$emit('close');
+    },
+  },
 };
 </script>
 

@@ -92,25 +92,25 @@
 
 <script>
 export default {
-  name: "FuelConsumptionCalculator",
+  name: 'FuelConsumptionCalculator',
   components: {},
   data() {
     return {
-      fuelAmount: "",
-      fuelPrize: "",
-      distance: "",
+      fuelAmount: '',
+      fuelPrize: '',
+      distance: '',
       show: false,
       isOpen: false,
-      resultConsumption: "",
-      resultPrice: "",
-      variable: ""
+      resultConsumption: '',
+      resultPrice: '',
+      variable: '',
     };
   },
   methods: {
     reset() {
-      (this.fuelAmount = ""),
-        (this.fuelPrize = ""),
-        (this.distance = ""),
+      (this.fuelAmount = ''),
+        (this.fuelPrize = ''),
+        (this.distance = ''),
         (this.show = false);
     },
     result() {
@@ -119,16 +119,16 @@ export default {
         100
       ).toFixed(1);
       this.resultPrice = (this.resultConsumption * this.fuelPrize).toFixed(1);
-    }
+    },
   },
   computed: {
     checkInputs: function() {
-      if ((this.fuelAmount && this.fuelPrize && this.distance) != "") {
+      if ((this.fuelAmount && this.fuelPrize && this.distance) != '') {
         return true;
       }
       return false;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -153,7 +153,7 @@ export default {
 }
 
 .fuelIcon {
-  background-image: url("/src/assets/images/fuel.png");
+  background-image: url('/src/assets/images/fuel.png');
 }
 
 .padding-zero {

@@ -37,7 +37,24 @@
           oraz ciekawostki ze świata motoryzacji
         </h4>
       </div>
-      <div id="news" class="home__news"><News ref="news" /></div>
+      <div id="news" class="home__news">
+        <div class="news">
+          <div class="publications">
+            <h2 class="container">Publikacje</h2>
+            <div
+              class="feedgrabbr_widget"
+              id="fgid_210708a2263cbe8bb30d72a2a"
+            ></div>
+          </div>
+          <div class="news">
+            <h2 class="container">Newsy</h2>
+            <div
+              class="feedgrabbr_widget"
+              id="fgid_0cbd3a82693bdaba787db32ef"
+            ></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -45,16 +62,31 @@
 <script>
 import VideoBackground from "./VideoBackground.vue";
 import NavMenu from "../Header/NavMenu.vue";
-import News from "./News.vue";
+//import News from "./News.vue";
 
 export default {
   name: "HomePage",
   components: {
     VideoBackground,
-    NavMenu,
-    News
+    NavMenu
+    // News
+  },
+  mounted() {
+    // eslint-disable-next-line no-unused-vars
   },
   created() {
+    // eslint-disable-next-line no-unused-vars
+
+    //async src => "https://www.feedgrabbr.com/widget/fgwidget.js";
+    let fg_widgets;
+    if (typeof fg_widgets === "undefined") {
+      fg_widgets = new Array();
+      fg_widgets.push("fgid_210708a2263cbe8bb30d72a2a");
+    }
+    if (typeof fg_widgets === "undefined") {
+      fg_widgets = new Array();
+      fg_widgets.push("fgid_0cbd3a82693bdaba787db32ef");
+    }
     if (this.$route.name === "Home") {
       this.$refs.news;
     }
@@ -137,6 +169,21 @@ export default {
 }
 #element {
   transition: 2s;
+}
+
+.news {
+  width: 100%;
+  height: auto;
+}
+.feedgrabbr_widget {
+  width: 100%;
+  height: auto;
+}
+.publications {
+  background-color: $color-purple1;
+}
+.news {
+  background-color: $color-purple2;
 }
 @media screen and (min-width: 1010px) {
   .home__text {

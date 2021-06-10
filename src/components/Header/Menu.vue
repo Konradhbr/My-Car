@@ -20,15 +20,11 @@
           <a>panel użytkownika</a>
         </router-link>
       </li>
-      <li class="list__item" @click="reloadNews()">
-        <router-link :to="{ name: 'News', reloadNews }">
+      <li class="list__item">
+        <router-link :to="{ name: 'News' }">
           <a href="#news">Newsy</a>
         </router-link>
       </li>
-      <!-- <li>
-        <a href="#">subpage3</a>
-      </li> -->
-
       <li class="list__item">
         <router-link :to="{ name: 'Calculators' }">
           <a href="#">kalkulatory</a>
@@ -41,14 +37,10 @@
         >
           <User />
           <div class="user-info">
-            <!-- <li class="nav-item"> -->
             <p class="nav-item">{{ user.data.email }}</p>
-            <!-- </li> -->
-            <!-- <li class="nav-item"> -->
             <p class="nav-link nav-item uppercase" @click.prevent="signOut">
               Wyloguj
             </p>
-            <!-- </li> -->
           </div>
         </div>
       </template>
@@ -67,29 +59,29 @@
 </template>
 
 <script>
-import firebase from "firebase";
-import { mapGetters } from "vuex";
-import User from "../Icons/User.vue";
+import firebase from 'firebase';
+import { mapGetters } from 'vuex';
+import User from '../Icons/User.vue';
 
 export default {
-  name: "Menu",
+  name: 'Menu',
   components: { User }, //ModalAlertLogin },
   computed: {
     ...mapGetters({
       // map `this.user` to `this.$store.getters.user`
-      user: "user"
-    })
+      user: 'user',
+    }),
   },
   data() {
     return {
       isMobile: false,
       isDesktop: false,
-      modalAlertLogin: false
+      modalAlertLogin: false,
     };
   },
   mounted() {
     this.$nextTick(function() {
-      window.addEventListener("resize", this.getWindowWidth);
+      window.addEventListener('resize', this.getWindowWidth);
 
       this.getWindowWidth();
     });
@@ -97,7 +89,7 @@ export default {
 
   methods: {
     reloadHome() {
-      if (this.$route.name === "Home") {
+      if (this.$route.name === 'Home') {
         this.$router.go(0);
         //window.scrollTo(0, 0);
       } else {
@@ -124,21 +116,21 @@ export default {
         .signOut()
         .then(() => {
           this.$router.replace({
-            name: "Home"
+            name: 'Home',
           });
         });
 
       this.user.firstOpenDashboard = true;
       this.user.activeCar = null;
-    }
+    },
     // showAlertLogin() {
     //   this.modalAlertLogin = true;
     // }
   },
   beforeUnmount() {
-    window.removeEventListener("resize", this.getWindowWidth);
-    window.removeEventListener("resize", this.getWindowHeight);
-  }
+    window.removeEventListener('resize', this.getWindowWidth);
+    window.removeEventListener('resize', this.getWindowHeight);
+  },
 };
 </script>
 
@@ -161,7 +153,7 @@ export default {
 
   &::after {
     position: absolute;
-    content: "";
+    content: '';
     left: 0;
     top: 84px;
     height: 2px;
@@ -170,7 +162,7 @@ export default {
   }
   &::before {
     position: absolute;
-    content: "";
+    content: '';
     left: 0;
     top: 190px;
     height: 2px;
@@ -267,7 +259,7 @@ export default {
   position: relative;
   &:hover {
     &::after {
-      content: "";
+      content: '';
       height: 2px;
       width: 100%;
       background: $color-red;

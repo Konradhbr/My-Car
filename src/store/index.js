@@ -1,6 +1,6 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 //import * as Cookies from "js-cookie";
 
 Vue.use(Vuex);
@@ -11,13 +11,21 @@ export default new Vuex.Store({
       loggedIn: false,
       data: null,
       firstOpenDashboard: true,
-      activeCar: null
-    }
+      activeCar: null,
+      activeCarData: {
+        carName: null,
+        engine: null,
+        insuranceDate: null,
+        reviewDate: null,
+        year: null,
+        mileage: null,
+      },
+    },
   },
   getters: {
     user(state) {
       return state.user;
-    }
+    },
   },
   mutations: {
     SET_LOGGED_IN(state, value) {
@@ -33,27 +41,27 @@ export default new Vuex.Store({
       state.user.activeCar = value;
 
       // this.commit("saveData");
-    }
+    },
   },
   actions: {
     fetchUser({ commit }, user) {
-      commit("SET_LOGGED_IN", user !== null);
+      commit('SET_LOGGED_IN', user !== null);
       if (user) {
-        commit("SET_USER", {
+        commit('SET_USER', {
           displayName: user.displayName,
-          email: user.email
+          email: user.email,
         });
       } else {
-        commit("SET_USER", null);
+        commit('SET_USER', null);
       }
     },
     fetchChoosenCar({ commit }, value) {
-      commit("SET_FIRST_OPEN_DASHBOARD", value);
+      commit('SET_FIRST_OPEN_DASHBOARD', value);
     },
     fetchActivedCar({ commit }, value) {
-      commit("SET_ACTIVE_CAR", value);
-    }
+      commit('SET_ACTIVE_CAR', value);
+    },
   },
   plugins: [createPersistedState()],
-  modules: {}
+  modules: {},
 });

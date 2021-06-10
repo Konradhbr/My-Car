@@ -1,5 +1,5 @@
 <template>
-  <div class="news">
+  <div class="news" :key="reRender">
     <div class="publications">
       <h2 class="container">Publikacje</h2>
       <div class="feedgrabbr_widget" id="fgid_210708a2263cbe8bb30d72a2a"></div>
@@ -13,20 +13,26 @@
 
 <script>
 export default {
-  name: "News",
-  created() {
+  name: 'News',
+  data() {
+    return {
+      reRender: 0,
+    };
+  },
+  mounted() {
+    this.location.reload();
     // eslint-disable-next-line no-unused-vars
-    async src => "https://www.feedgrabbr.com/widget/fgwidget.js";
-    let fg_widgets;
-    if (typeof fg_widgets === "undefined") {
-      fg_widgets = new Array();
-      fg_widgets.push("fgid_210708a2263cbe8bb30d72a2a");
-    }
-    if (typeof fg_widgets === "undefined") {
-      fg_widgets = new Array();
-      fg_widgets.push("fgid_0cbd3a82693bdaba787db32ef");
-    }
-  }
+    // async src => "https://www.feedgrabbr.com/widget/fgwidget.js";
+    // let fg_widgets;
+    // if (typeof fg_widgets === "undefined") {
+    //   fg_widgets = new Array();
+    //   fg_widgets.push("fgid_210708a2263cbe8bb30d72a2a");
+    // }
+    // if (typeof fg_widgets === "undefined") {
+    //   fg_widgets = new Array();
+    //   fg_widgets.push("fgid_0cbd3a82693bdaba787db32ef");
+    // }
+  },
 };
 </script>
 

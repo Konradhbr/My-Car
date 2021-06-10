@@ -1,30 +1,58 @@
 <template>
-  <modal @close="close">
+  <modal @close="$emit('close')">
     <div class="modal__info">
-      <span class="decor">Aktualizacja danych</span>
+      <span class="decor">Zaktualizuj dane auta</span>
 
       <div class="modal__text">
-        <!-- <div v-if="error != null" class="alert alert-danger">{{ error }}</div> -->
+        <div v-if="error" class="alert alert-danger">{{ error }}</div>
 
-        <form action="#" @submit.prevent="update">
-          <div class="email">
-            <label for="email">Dane</label><br />
-            <input
-              id="data"
-              type="data"
-              class="form-control"
-              name="data"
-              value
-              required
-              autofocus
-              v-model="form.data"
-            />
-            <br />
-          </div>
+        <form action="#" @submit.prevent="UpdateCar">
+          <label for="mileage">Przebieg</label><br />
+          <input
+            id="mileage"
+            type="number"
+            class="form-control"
+            name="mileage"
+            placeholder="np. 400000"
+            v-model="form.mileage"
+          />
           <br />
-
-          <button type="submit" class="button button--full">
-            <span>Zmień</span>
+          <label for="engine">Silnik</label><br />
+          <input
+            id="engine"
+            type="number"
+            class="form-control"
+            name="engine"
+            placeholder="np. 2.0"
+            pattern="[0-9]+([\.,][0-9]+)?"
+            step="0.1"
+            v-model="form.engine"
+          />
+          <br />
+          <label for="insurance">Data ważności OC</label><br />
+          <input
+            id="insurance"
+            type="date"
+            class="form-control"
+            name="insurance"
+            v-model="form.insurance"
+          />
+          <br />
+          <label for="review">Data ważności przeglądu auta </label><br />
+          <input
+            id="review"
+            type="date"
+            class="form-control"
+            name="review"
+            v-model="form.review"
+          />
+          <br />
+          <button
+            type="submit"
+            class="button button--full"
+            @click.prevent="UpdateCar"
+          >
+            <span>Aktualizuj</span>
           </button>
         </form>
       </div>
@@ -33,75 +61,79 @@
 </template>
 
 <script>
-import Modal from "@/components/Modals/Modal.vue";
-import firebase from "firebase";
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
+
+import Modal from '@/components/Modals/Modal.vue';
+import firebase from 'firebase';
 
 export default {
-  name: "ModalUpdateData",
+  name: 'ModalAddCar',
   components: { Modal },
   data() {
     return {
-      error: null,
       form: {
-        data: "",
-        error: null
-      }
+        mileage: this.user.activeCarData.mileage,
+        engine: this.user.activeCarData.engine,
+        insurance: this.user.activeCarData.insuranceDate,
+        review: this.user.activeCarData.reviewDate,
+      },
+      error: null,
+      submitted: false,
+      id: null,
+      carCounter: null,
     };
   },
-  props: {},
+  props: {
+    data: {
+      type: Object,
+      required: false,
+    },
+  },
   computed: {
     ...mapGetters({
-      user: "user"
-    })
+      user: 'user',
+    }),
   },
   created() {
-    this.goToDashboard();
+    // this.counter();
   },
   methods: {
-    close() {
-      this.$emit("close", true);
-    },
-    async goToDashboard() {
-      if (this.user.loggedIn) {
-        this.close();
-        this.$router.push("Dashboard");
-      }
-    },
-    update() {
+    UpdateCar() {
       firebase
-        .auth()
-        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
-        // eslint-disable-next-line no-unused-vars
-        .then(data => {
-          firebase
-            .auth()
-            .signInWithEmailAndPassword(this.form.email, this.form.password);
-        })
-        .catch(error => {
-          this.form.error = error.message;
+        .database()
+        .ref(
+          `${this.user.data.email.replace('.', ',')}/` +
+            'cars/' +
+            `${this.user.activeCar}/`
+        )
+        .set({
+          mileage: this.form.mileage,
+          engine: this.form.engine,
+          insurance: this.form.insurance,
+          review: this.form.review,
         });
-      if (this.user.loggedIn) {
-        this.close();
-        this.$router.push("Dashboard");
-      }
-    }
-  }
+      this.$emit('close');
+    },
+  },
+  // async counter() {
+  //   var ref = firebase
+  //     .database()
+  //     .ref(`${this.user.data.email.replace('.', ',')}/cars`); // gdy let results = await nie było dodane to return zwracał promise function. trzeba było dodać await
+  //   let results = await ref.once('value').then(function(snapshot) {
+  //     var refAmount = snapshot.numChildren();
+  //     return refAmount;
+  //   });
+
+  //   this.carCounter = results;
+  // },
 };
 </script>
 
 <style lang="scss" scoped>
-.forgetPasssword {
-  margin: 20px 0;
+button {
+  margin-top: 20px;
 }
-.email {
-  margin-bottom: 20px;
-}
-.errors {
-  margin-top: 15px;
-  p {
-    font-size: 15px;
-    color: $color-red;
-  }
+input {
+  margin-bottom: 10px;
 }
 </style>

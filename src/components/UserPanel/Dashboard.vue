@@ -41,7 +41,13 @@
         >
           <h5>Wybierz auto</h5>
         </div>
-        <router-view></router-view>
+        <div
+          @click="modalUpdateData = !modalUpdateData"
+          class="chooseCar underline--red container"
+        >
+          <h5>zaktualizuj dane</h5>
+        </div>
+        <router-view :key="$route.fullPath"></router-view>
 
         <ModalChooseCar
           v-if="modalChooseCar === true"
@@ -62,40 +68,40 @@
           v-if="modalAddCarFailed == true"
           @close="CloseModals()"
         />
-        <!-- </div> -->
+        <ModalUpdateData
+          v-if="modalUpdateData == true"
+          @close="CloseModals()"
+        />
       </div>
     </div>
-    <!-- <template v-if="(modalChooseCar = true)">
-
-    </template> -->
   </div>
-  <!-- <div v-if="user" class="alert alert-success" role="alert">
-      </div> -->
 </template>
 
 <script>
-import NavMenu from "../Header/NavMenu.vue";
+import NavMenu from '../Header/NavMenu.vue';
 
-import { mapGetters } from "vuex";
-import ModalChooseCar from "@/components/Modals/ModalChooseCar.vue";
-import ModalAddCar from "@/components/Modals/ModalAddCar.vue";
-import ModalAddCarSuccess from "@/components/Modals/ModalAddCarSuccess.vue";
-import ModalAddCarFailed from "@/components/Modals/ModalAddCarFailed.vue";
+import { mapGetters } from 'vuex';
+import ModalChooseCar from '@/components/Modals/ModalChooseCar.vue';
+import ModalAddCar from '@/components/Modals/ModalAddCar.vue';
+import ModalAddCarSuccess from '@/components/Modals/ModalAddCarSuccess.vue';
+import ModalAddCarFailed from '@/components/Modals/ModalAddCarFailed.vue';
+import ModalUpdateData from '@/components/Modals/ModalUpdateData.vue';
 
 export default {
-  name: "Dashboard",
+  name: 'Dashboard',
   components: {
     NavMenu,
     ModalChooseCar,
     ModalAddCar,
     ModalAddCarSuccess,
-    ModalAddCarFailed
+    ModalAddCarFailed,
+    ModalUpdateData,
   },
   computed: {
     // map `this.user` to `this.$store.getters.user`
     ...mapGetters({
-      user: "user"
-    })
+      user: 'user',
+    }),
   },
   data() {
     return {
@@ -103,20 +109,22 @@ export default {
       modalChooseCar: false,
       modalAddCarSuccess: false,
       modalAddCarFailed: false,
+      modalUpdateData: false,
+
       subpages: [
         {
-          route: "Dashboard-CarInfo",
-          label: "Dane auta"
+          route: 'Dashboard-CarInfo',
+          label: 'Dane auta',
         },
         {
-          route: "Dashboard-Service",
-          label: "Serwis"
+          route: 'Dashboard-Service',
+          label: 'Serwis',
         },
         {
-          route: "Dashboard-FuelConsumption",
-          label: "Zużycie paliwa"
-        }
-      ]
+          route: 'Dashboard-FuelConsumption',
+          label: 'Zużycie paliwa',
+        },
+      ],
     };
   },
   mounted() {
@@ -128,6 +136,7 @@ export default {
       this.modalAddCarSuccess = false;
       this.modalAddCarFailed = false;
       this.modalChooseCar = false;
+      this.modalUpdateData = false;
     },
     async firstOpen() {
       if (this.user.firstOpenDashboard === true) {
@@ -136,8 +145,8 @@ export default {
       } else {
         this.modalChooseCar = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -152,7 +161,7 @@ export default {
 .header {
   width: 100%;
   height: 500px;
-  background-image: url("/src/assets/images/dashboard-bg.jpg");
+  background-image: url('/src/assets/images/dashboard-bg.jpg');
   background-position: center;
   background-size: cover;
 }
@@ -198,7 +207,7 @@ export default {
     position: relative;
 
     &::after {
-      content: "";
+      content: '';
       height: 2px;
       width: 100%;
       background: $color-red;

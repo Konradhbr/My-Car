@@ -1,56 +1,56 @@
 <template>
   <div class="carInfo container">
     <div class="carInfo__actual__car">
-      <h3>{{ carName }}</h3>
+      <h3>{{ this.user.activeCarData.carName }}</h3>
     </div>
     <div class="carInfo__date">
       <div class="carInfo__date__insurance">
         <h4>Data ważności ubezpieczenia OC auta</h4>
-        <p>{{ insuranceDate }}</p>
+        <p>{{ this.user.activeCarData.insuranceDate }}</p>
       </div>
       <div class="carInfo__date__review">
         <h4>Data ważności przeglądu auta</h4>
-        <p>{{ reviewDate }}</p>
+        <p>{{ this.user.activeCarData.reviewDate }}</p>
       </div>
     </div>
     <div class="carInfo__info">
       <div class="carInfo__info__item">
         <h4>Rok produkcji</h4>
-        <p>{{ year }}</p>
+        <p>{{ this.user.activeCarData.year }}</p>
       </div>
       <div class="carInfo__info__item">
         <h4>Przebieg auta</h4>
-        <p>{{ mileage }} km</p>
+        <p>{{ this.user.activeCarData.mileage }} km</p>
       </div>
       <div class="carInfo__info__item">
         <h4>Pojemność silnika</h4>
-        <p>{{ engine }}</p>
+        <p>{{ this.user.activeCarData.engine }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import firebase from "firebase";
-import { mapGetters } from "vuex";
+import firebase from 'firebase';
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "CarInfo",
+  name: 'CarInfo',
   computed: {
     // map `this.user` to `this.$store..user`
     ...mapGetters({
-      user: "user"
-    })
+      user: 'user',
+    }),
   },
   data() {
     return {
-      carName: null,
-      insuranceDate: null,
-      reviewDate: null,
-      year: null,
-      mileage: null,
-      engine: null,
-      activeCar: null
+      //  carName: null,
+      // insuranceDate: null,
+      // reviewDate: null,
+      // year: null,
+      // mileage: null,
+      // engine: null,
+      // activeCar: null,
     };
   },
   created() {
@@ -62,22 +62,23 @@ export default {
       var carInfo = firebase
         .database()
         .ref(
-          `${this.user.data.email.replace(".", ",")}/` +
-            "cars/" +
+          `${this.user.data.email.replace('.', ',')}/` +
+            'cars/' +
             `${this.user.activeCar}`
         );
-      carInfo.on("value", snapshot => {
+      carInfo.on('value', (snapshot) => {
         const data = snapshot.val();
-        this.carName = data.brand + " " + data.model;
-        this.insuranceDate = data.insurance;
-        this.reviewDate = data.review;
-        this.year = data.year;
-        this.mileage = data.mileage;
-        this.engine = data.engine;
+        this.user.activeCarData.carName = data.brand + ' ' + data.model;
+        this.user.activeCarData.insuranceDate = data.insurance;
+        this.user.activeCarData.reviewDate = data.review;
+        this.user.activeCarData.year = data.year;
+        this.user.activeCarData.mileage = data.mileage;
+        this.user.activeCarData.engine = data.engine;
+
         console.log(data.year);
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -90,6 +91,10 @@ export default {
   }
   h4 {
     color: black;
+  }
+  img {
+    max-height: 40px;
+    max-width: 40px;
   }
 }
 .carInfo__actual__car {
