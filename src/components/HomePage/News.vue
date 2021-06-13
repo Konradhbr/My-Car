@@ -20,17 +20,20 @@ export default {
     };
   },
   mounted() {
-    this.location.reload();
+    setTimeout(function() {
+      this.location.reload();
+    }, 2000);
+
     // eslint-disable-next-line no-unused-vars
-    // async src => "https://www.feedgrabbr.com/widget/fgwidget.js";
+    // async (src) => 'https://www.feedgrabbr.com/widget/fgwidget.js';
     // let fg_widgets;
-    // if (typeof fg_widgets === "undefined") {
+    // if (typeof fg_widgets === 'undefined') {
     //   fg_widgets = new Array();
-    //   fg_widgets.push("fgid_210708a2263cbe8bb30d72a2a");
+    //   fg_widgets.push('fgid_210708a2263cbe8bb30d72a2a');
     // }
-    // if (typeof fg_widgets === "undefined") {
+    // if (typeof fg_widgets === 'undefined') {
     //   fg_widgets = new Array();
-    //   fg_widgets.push("fgid_0cbd3a82693bdaba787db32ef");
+    //   fg_widgets.push('fgid_0cbd3a82693bdaba787db32ef');
     // }
   },
 };

@@ -13,7 +13,8 @@ export default new Vuex.Store({
       firstOpenDashboard: true,
       activeCar: null,
       activeCarData: {
-        carName: null,
+        model: null,
+        brand: null,
         engine: null,
         insuranceDate: null,
         reviewDate: null,

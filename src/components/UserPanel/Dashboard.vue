@@ -43,7 +43,7 @@
         </div>
         <div
           @click="modalUpdateData = !modalUpdateData"
-          class="chooseCar underline--red container"
+          class="chooseCar underline--red container updateCar"
         >
           <h5>zaktualizuj dane</h5>
         </div>
@@ -61,15 +61,15 @@
           @close="CloseModals()"
         />
         <ModalAddCarSuccess
-          v-if="modalAddCarSuccess == true"
+          v-if="modalAddCarSuccess === true"
           @close="CloseModals()"
         />
         <ModalAddCarFailed
-          v-if="modalAddCarFailed == true"
+          v-if="modalAddCarFailed === true"
           @close="CloseModals()"
         />
         <ModalUpdateData
-          v-if="modalUpdateData == true"
+          v-if="modalUpdateData === true"
           @close="CloseModals()"
         />
       </div>
@@ -124,6 +124,10 @@ export default {
           route: 'Dashboard-FuelConsumption',
           label: 'Zużycie paliwa',
         },
+        {
+          route: 'Dashboard-chat',
+          label: 'Chat',
+        },
       ],
     };
   },
@@ -161,7 +165,7 @@ export default {
 .header {
   width: 100%;
   height: 500px;
-  background-image: url('/src/assets/images/dashboard-bg.jpg');
+  background-image: url('../../assets/images/dashboard-bg.jpg');
   background-position: center;
   background-size: cover;
 }
@@ -225,6 +229,11 @@ export default {
   h5 {
     color: black;
   }
+}
+
+.updateCar {
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(15, 32, 108, 0.15);
 }
 
 @media screen and (min-width: 768px) {

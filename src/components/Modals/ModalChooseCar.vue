@@ -17,7 +17,7 @@
         <button class="button button--full" @click="$emit('openModalAddCar')">
           <span>Dodaj nowe auto</span>
         </button>
-        <p>{{ prefs }}</p>
+        <!-- <p>{{ prefs }}</p> -->
       </div>
     </div>
   </modal>

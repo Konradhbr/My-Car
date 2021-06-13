@@ -2,7 +2,7 @@
   <div>
     <div class="banner">
       <div class="banner__label">
-        <img src="@/assets/Icons/piggy-bank.svg" alt="piggy-bank" />
+        <img src="@/assets/icons/piggy-bank.svg" alt="piggy-bank" />
       </div>
       <span class="banner__title">
         <h4>kalkulator opłacalności instalacji lpg</h4>
@@ -102,37 +102,37 @@
 </template>
 
 <script>
-import VueSlider from "vue-slider-component";
-import "vue-slider-component/theme/antd.css";
+import VueSlider from 'vue-slider-component';
+import 'vue-slider-component/theme/antd.css';
 
 export default {
-  name: "LPGCalculator",
+  name: 'LPGCalculator',
   components: {
-    VueSlider
+    VueSlider,
   },
   data() {
     return {
-      petrolPrice: "",
-      lpgPrice: "",
-      mileage: "",
-      petrolConsumption: "",
-      lpgConsumption: "",
+      petrolPrice: '',
+      lpgPrice: '',
+      mileage: '',
+      petrolConsumption: '',
+      lpgConsumption: '',
       show: false,
       isOpen: false,
-      saveYear: "",
-      saveMonth: "",
-      months: "",
-      lpgMonthlyPrice: "",
-      petrolMonthlyPrice: ""
+      saveYear: '',
+      saveMonth: '',
+      months: '',
+      lpgMonthlyPrice: '',
+      petrolMonthlyPrice: '',
     };
   },
   methods: {
     reset() {
-      (this.petrolPrice = ""),
-        (this.lpgPrice = ""),
-        (this.mileage = ""),
-        (this.petrolValue = ""),
-        (this.lpgValue = ""),
+      (this.petrolPrice = ''),
+        (this.lpgPrice = ''),
+        (this.mileage = ''),
+        (this.petrolValue = ''),
+        (this.lpgValue = ''),
         (this.show = false);
     },
     result() {
@@ -143,16 +143,16 @@ export default {
       this.saveMonth = parseInt(this.petrolMonthlyPrice - this.lpgMonthlyPrice);
       this.saveYear = parseInt(this.saveMonth * 12);
       this.months = parseInt(3000 / this.saveMonth + 1);
-    }
+    },
   },
   computed: {
     checkInputs: function() {
-      if ((this.petrolPrice && this.lpgPrice && this.mileage) != "") {
+      if ((this.petrolPrice && this.lpgPrice && this.mileage) != '') {
         return true;
       }
       return false;
-    }
-  }
+    },
+  },
 };
 </script>
 

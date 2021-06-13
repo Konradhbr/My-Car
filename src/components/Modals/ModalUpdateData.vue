@@ -69,20 +69,6 @@ import firebase from 'firebase';
 export default {
   name: 'ModalAddCar',
   components: { Modal },
-  data() {
-    return {
-      form: {
-        mileage: this.user.activeCarData.mileage,
-        engine: this.user.activeCarData.engine,
-        insurance: this.user.activeCarData.insuranceDate,
-        review: this.user.activeCarData.reviewDate,
-      },
-      error: null,
-      submitted: false,
-      id: null,
-      carCounter: null,
-    };
-  },
   props: {
     data: {
       type: Object,
@@ -94,8 +80,37 @@ export default {
       user: 'user',
     }),
   },
+  data() {
+    return {
+      form: {
+        mileage: null,
+        engine: null,
+        insurance: null,
+        review: null,
+        brand: null,
+        model: null,
+        year: null,
+      },
+      error: null,
+      submitted: false,
+      id: null,
+      carCounter: null,
+    };
+  },
   created() {
-    // this.counter();
+    (this.form.mileage = this.user.activeCarData.mileage),
+      (this.form.engine = this.user.activeCarData.engine),
+      (this.form.insurance = this.user.activeCarData.insuranceDate),
+      (this.form.review = this.user.activeCarData.reviewDate);
+    (this.form.brand = this.user.activeCarData.brand),
+      (this.form.model = this.user.activeCarData.model),
+      (this.form.year = this.user.activeCarData.year);
+    //  form: {
+    //     mileage: this.user.activeCarData.mileage,
+    //     engine: this.user.activeCarData.engine,
+    //     insurance: this.user.activeCarData.insuranceDate,
+    //     review: this.user.activeCarData.reviewDate,
+    //   },
   },
   methods: {
     UpdateCar() {
@@ -111,6 +126,10 @@ export default {
           engine: this.form.engine,
           insurance: this.form.insurance,
           review: this.form.review,
+          model: this.form.model,
+          brand: this.form.brand,
+
+          year: this.form.year,
         });
       this.$emit('close');
     },

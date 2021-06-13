@@ -38,29 +38,29 @@
 </template>
 
 <script>
-import ModalLogin from "@/components/Modals/ModalLogin.vue";
-import ModalRegister from "@/components/Modals/ModalRegister.vue";
-import ModalRegisterSuccess from "@/components/Modals/ModalRegisterSuccess.vue";
-import ModalRecoverPassword from "@/components/Modals/ModalRecoverPassword.vue";
-import ModalAlertLogin from "@/components/Modals/ModalAlertLogin.vue";
+import ModalLogin from '@/components/Modals/ModalLogin.vue';
+import ModalRegister from '@/components/Modals/ModalRegister.vue';
+import ModalRegisterSuccess from '@/components/Modals/ModalRegisterSuccess.vue';
+import ModalRecoverPassword from '@/components/Modals/ModalRecoverPassword.vue';
+import ModalAlertLogin from '@/components/Modals/ModalAlertLogin.vue';
 
-import Menu from "./Menu.vue";
+import Menu from './Menu.vue';
 
 export default {
-  name: "NavMenu",
+  name: 'NavMenu',
   components: {
     Menu,
     ModalLogin,
     ModalRegister,
     ModalRegisterSuccess,
     ModalRecoverPassword,
-    ModalAlertLogin
+    ModalAlertLogin,
   },
   props: {
     blackBG: {
       type: Boolean,
-      required: false
-    }
+      required: false,
+    },
   },
   data() {
     return {
@@ -70,20 +70,20 @@ export default {
       modalRecoverPassword: false,
       isBlack: this.blackBG,
       modalAlertLogin: false,
-      logo: { title: "logo", icon: require("@/assets/Images/logo.png") }
+      logo: { title: 'logo', icon: require('@/assets/images/logo.png') },
     };
   },
   methods: {
     OpenHamburger() {
-      const value = document.querySelector(".nav__hamburger");
-      value.classList.toggle("nav__hamburger-active");
+      const value = document.querySelector('.nav__hamburger');
+      value.classList.toggle('nav__hamburger-active');
     },
     Open() {
-      const value = document.querySelector(".overlay__menu");
-      const element = document.querySelector(".nav__hamburger");
+      const value = document.querySelector('.overlay__menu');
+      const element = document.querySelector('.nav__hamburger');
 
-      value.classList.toggle("-open");
-      element.classList.toggle("nav__hamburger-active");
+      value.classList.toggle('-open');
+      element.classList.toggle('nav__hamburger-active');
     },
     CloseModals() {
       this.modalLogin = false;
@@ -93,11 +93,11 @@ export default {
       this.modalAlertLogin = false;
     },
     ChangeBlack() {
-      if (this.bgColor == "black") {
+      if (this.bgColor == 'black') {
         this.isBlack = true;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -160,7 +160,7 @@ export default {
     left: 15%;
     top: 50%;
     display: block;
-    content: "";
+    content: '';
     transition: all 0.2s ease-in-out;
     &:before {
       cursor: pointer;
@@ -172,7 +172,7 @@ export default {
       left: 15%;
       top: 50%;
       display: block;
-      content: "";
+      content: '';
       transition: all 0.5s ease-in-out;
       left: 0;
       top: -10px;
@@ -187,7 +187,7 @@ export default {
       left: 15%;
       top: 50%;
       display: block;
-      content: "";
+      content: '';
       transition: all 0.5s ease-in-out;
       left: 0;
       top: 10px;

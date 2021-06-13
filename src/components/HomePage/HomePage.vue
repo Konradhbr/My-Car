@@ -21,77 +21,57 @@
       <div class="home__icon">
         <div class="icon">
           <a href="#news" id="goNews">
-            <img src="@/assets/Icons/scroll-icon.svg" alt="scrol" />
+            <img src="@/assets/icons/scroll-icon.svg" alt="scroll" />
           </a>
         </div>
       </div>
     </div>
     <div class="home__news">
-      <router-view :key="$route.fullPath"></router-view>
+      <router-view></router-view>
 
       <div class="news-gradient"></div>
-      <div class="news__description container">
-        <h2 id="news" class="news--red">Newsy</h2>
-        <h4>
-          Sprawdź najnowsze informacje<br />
-          oraz ciekawostki ze świata motoryzacji
-        </h4>
-      </div>
-      <div id="news" class="home__news">
-        <div class="news">
-          <div class="publications">
-            <h2 class="container">Publikacje</h2>
-            <div
-              class="feedgrabbr_widget"
-              id="fgid_210708a2263cbe8bb30d72a2a"
-            ></div>
-          </div>
-          <div class="news">
-            <h2 class="container">Newsy</h2>
-            <div
-              class="feedgrabbr_widget"
-              id="fgid_0cbd3a82693bdaba787db32ef"
-            ></div>
-          </div>
+      <div class="page__description container">
+        <div class="page__description__inner">
+          <h2 id="news" class="news--red">Newsy</h2>
+          <h4>
+            Sprawdź najnowsze informacje<br />
+            oraz ciekawostki ze świata motoryzacji
+          </h4>
         </div>
+        <div class="page__description__inner">
+          <h2 id="news" class="news--red">Panel użytkownika</h2>
+          <h4>
+            Zarządzaj swoim autem<br />
+            z poziomu panelu użytkownika
+          </h4>
+        </div>
+        <div class="page__description__inner">
+          <h2 id="news" class="news--red">Kalkulatory</h2>
+          <h4>
+            Za pomocą kalkulatorów oblicz<br />
+            potrzebne informacje
+          </h4>
+        </div>
+      </div>
+      <div class="footer">
+        <p>Copyright Konrad Haber</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import VideoBackground from "./VideoBackground.vue";
-import NavMenu from "../Header/NavMenu.vue";
-//import News from "./News.vue";
+import VideoBackground from './VideoBackground.vue';
+import NavMenu from '@/components/Header/NavMenu.vue';
 
 export default {
-  name: "HomePage",
+  name: 'HomePage',
   components: {
     VideoBackground,
-    NavMenu
-    // News
+    NavMenu,
   },
-  mounted() {
-    // eslint-disable-next-line no-unused-vars
-  },
-  created() {
-    // eslint-disable-next-line no-unused-vars
-
-    //async src => "https://www.feedgrabbr.com/widget/fgwidget.js";
-    let fg_widgets;
-    if (typeof fg_widgets === "undefined") {
-      fg_widgets = new Array();
-      fg_widgets.push("fgid_210708a2263cbe8bb30d72a2a");
-    }
-    if (typeof fg_widgets === "undefined") {
-      fg_widgets = new Array();
-      fg_widgets.push("fgid_0cbd3a82693bdaba787db32ef");
-    }
-    if (this.$route.name === "Home") {
-      this.$refs.news;
-    }
-  },
-  methods: {}
+  mounted() {},
+  methods: {},
 };
 </script>
 
@@ -156,13 +136,25 @@ export default {
   text-align: left;
   margin-bottom: 10px;
 }
-.news__description {
+.page__description {
   width: 100%;
   height: auto;
-  padding: 200px 5% 100px 5%;
+  padding: 50px 5% 100px 5%;
   background-color: $color-purple2;
   z-index: 2;
   text-align: left;
+
+  &__inner {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid rgb(225, 221, 221);
+
+    h2 {
+      font-size: 40px;
+    }
+  }
+
   h4 {
     line-height: 35px;
   }
@@ -185,7 +177,23 @@ export default {
 .news {
   background-color: $color-purple2;
 }
+.footer {
+  width: 100%;
+  background-color: #2a1b3d;
+  color: red;
+  display: flex;
+  justify-content: center;
+}
 @media screen and (min-width: 1010px) {
+  .page__description {
+    display: flex;
+    padding: 100px 5% 200px 5%;
+
+    &__inner {
+      width: inherit;
+    }
+  }
+
   .home__text {
     margin-top: 120px;
     text-align: left;

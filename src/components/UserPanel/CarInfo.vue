@@ -1,7 +1,8 @@
 <template>
   <div class="carInfo container">
     <div class="carInfo__actual__car">
-      <h3>{{ this.user.activeCarData.carName }}</h3>
+      <h3>{{ this.user.activeCarData.brand }}</h3>
+      <h3>{{ this.user.activeCarData.model }}</h3>
     </div>
     <div class="carInfo__date">
       <div class="carInfo__date__insurance">
@@ -68,7 +69,9 @@ export default {
         );
       carInfo.on('value', (snapshot) => {
         const data = snapshot.val();
-        this.user.activeCarData.carName = data.brand + ' ' + data.model;
+        this.user.activeCarData.brand = data.brand;
+        this.user.activeCarData.model = data.model;
+        // this.user.activeCarData.carName = data.brand + ' ' + data.model;
         this.user.activeCarData.insuranceDate = data.insurance;
         this.user.activeCarData.reviewDate = data.review;
         this.user.activeCarData.year = data.year;
@@ -113,6 +116,13 @@ export default {
 }
 .carInfo__info__item {
   margin-bottom: 20px;
+}
+
+.carInfo__actual__car {
+  display: inline-flex;
+  h3 {
+    margin-right: 20px;
+  }
 }
 @media screen and (min-width: 1010px) {
   .carInfo__date {
